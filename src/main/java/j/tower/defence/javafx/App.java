@@ -1,23 +1,24 @@
 package j.tower.defence.javafx;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.Group;
 import javafx.stage.Stage;
 
-
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+        stage.setTitle("Tower Defence");
 
-        var label = new Label("Hello, JavaFX ");
-        var scene = new Scene(new StackPane(label), 640, 480);
-        stage.setScene(scene);
+        final var root = new Group();
+//        final var scene = new Scene(root, 600, 600);
+        final var screen = new Display(root, 600, 600);
+
+//        var label = new Label("Hello, JavaFX ");
+//        root.getChildren().add(label);
+//        root.getChildren().add(screen);
+        screen.start();
+        stage.setScene(screen);
         stage.show();
     }
 
