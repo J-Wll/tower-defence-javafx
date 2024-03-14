@@ -2,6 +2,7 @@ package j.tower.defence.javafx;
 
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -11,14 +12,12 @@ public class App extends Application {
         stage.setTitle("Tower Defence");
 
         final var root = new Group();
-//        final var scene = new Scene(root, 600, 600);
-        final var screen = new Display(root, 600, 600);
+        final var screen = new Display(600, 600);
+        root.getChildren().add(screen);
+        final var scene = new Scene(root, 600, 600);
 
-//        var label = new Label("Hello, JavaFX ");
-//        root.getChildren().add(label);
-//        root.getChildren().add(screen);
         screen.start();
-        stage.setScene(screen);
+        stage.setScene(scene);
         stage.show();
     }
 
