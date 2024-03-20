@@ -1,4 +1,4 @@
-package j.tower.defence.javafx;
+package game;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;

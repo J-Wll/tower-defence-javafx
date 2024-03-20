@@ -1,4 +1,4 @@
-package j.tower.defence.javafx;
+package game;
 
 import javafx.application.Application;
 import javafx.scene.Group;
