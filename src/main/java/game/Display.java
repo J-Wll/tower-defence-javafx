@@ -9,8 +9,8 @@ import javafx.scene.paint.Color;
 public class Display extends Pane {
 
     private static int width, height;
-    private Canvas canvas;
-    private GraphicsContext gc;
+    private final Canvas canvas;
+    private final GraphicsContext gc;
 
     public Display(int x, int y) {
         width = x;
