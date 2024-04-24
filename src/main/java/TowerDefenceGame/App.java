@@ -1,33 +1,26 @@
-package game;
+package TowerDefenceGame;
 
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
 public class App extends Application {
 
-    private static int width = 600;
-    private static int height = 600;
-    private final Canvas canvas = new Canvas(width, height);
-    private final GraphicsContext gc = canvas.getGraphicsContext2D();
+    private final static int WIDTH = 1000, HEIGHT = 800;
 
     @Override
     public void start(Stage stage) {
         stage.setTitle("Tower Defence");
 
         final var root = new Group();
-        final var screen = new Display(width, height, canvas, gc);
+        final var screen = new Display(WIDTH, HEIGHT);
         root.getChildren().add(screen);
-        final var scene = new Scene(root, 600, 600);
+        final var scene = new Scene(root, WIDTH, HEIGHT);
 
         screen.start();
         stage.setScene(scene);
         stage.show();
-
-        final var level = new Level();
     }
 
     public static void main(String[] args) {

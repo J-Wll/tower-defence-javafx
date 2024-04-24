@@ -1,4 +1,4 @@
-package game;
+package TowerDefenceGame;
 
 public class Tower implements GameSubscriber{
     private int baseDamage;
