@@ -25,8 +25,8 @@ public class GameStatePublisher {
             subscribers.remove(i);
         }
     }
-    
-    public void notify(String event){
+
+    public void notify(String event) {
         for (GameSubscriber sub : subscribers) {
             sub.update(event);
         }
@@ -47,7 +47,5 @@ public class GameStatePublisher {
     public void setGold(int gold) {
         this.gold = gold;
     }
-    
-    
 
 }

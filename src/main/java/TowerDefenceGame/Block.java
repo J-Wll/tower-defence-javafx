@@ -4,7 +4,12 @@
  */
 package TowerDefenceGame;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -27,7 +32,16 @@ public class Block extends Rectangle {
 
     public void render(GraphicsContext gc) {
         gc.setFill(Color.GREEN);
-        gc.fillRect(x*2, y, width, height);
+        gc.fillRect(x * 2, y, width, height);
+
+        InputStream stream = null;
+        try {
+            stream = new FileInputStream("src/main/java/TowerDefenceGame/Resources/grassTexture.png");
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        Image image = new Image(stream);
+        gc.drawImage(image, x, y, width, height);
     }
 
 }
