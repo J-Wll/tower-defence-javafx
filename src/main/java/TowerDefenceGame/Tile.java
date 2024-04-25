@@ -17,11 +17,11 @@ import javafx.scene.shape.Rectangle;
  *
  * @author user
  */
-public class Block extends Rectangle {
+public class Tile extends Rectangle {
 
     private int x, y, width, height, groundID, airID;
 
-    public Block(int x, int y, int width, int height, int groundID, int airID) {
+    public Tile(int x, int y, int width, int height, int groundID, int airID) {
         this.x = x;
         this.y = y;
         this.width = width;
