@@ -7,6 +7,7 @@ package TowerDefenceGame;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,22 +21,26 @@ import javafx.scene.shape.Rectangle;
 public class Tile extends Rectangle {
 
     private int x, y, width, height, groundID, airID;
+    private Textures dict;
 
-    public Tile(int x, int y, int width, int height, int groundID, int airID) {
+    public Tile(int x, int y, int width, int height, int groundID, int airID, Textures dict) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.groundID = groundID;
         this.airID = airID;
+        this.dict = dict;
     }
 
     public void render(GraphicsContext gc) {
-        gc.setFill(Color.GREEN);
-        gc.fillRect(x * 2, y, width, height);
+//        gc.setFill(Color.GREEN);
+//        gc.fillRect(x, y, width, height);
 
-        Image image = new Image("/grassTexture.png");
-        gc.drawImage(image, x, y, width, height);
+//        System.out.println(dict.get(1));
+//        Image image = new Image(dict.get(1));
+//        Image image = new Image("/grassTexture.png");
+        gc.drawImage(Textures.getText().get(1), x, y, width, height);
     }
 
 }

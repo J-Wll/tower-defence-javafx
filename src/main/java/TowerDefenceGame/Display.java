@@ -30,6 +30,7 @@ public class Display extends Pane {
             public void handle(long currentNanoTime) {
 //                time in seconds
                 double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+
                 gc.clearRect(0, 0, width, height);
 
                 gc.setFill(Color.BLUE);

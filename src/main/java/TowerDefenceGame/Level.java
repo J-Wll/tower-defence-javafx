@@ -4,6 +4,7 @@
  */
 package TowerDefenceGame;
 
+import java.util.HashMap;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -14,17 +15,19 @@ import javafx.scene.paint.Color;
 public class Level {
 
 //    Width and height of the level in tiles
-    private int levelWidth = 20;
-    private int levelHeight = 12;
+    private final int levelWidth = 18;
+    private final int levelHeight = 10;
 //    Tile size in pixels
-    private int tileSize = 64;
+    private final int tileSize = 64;
 //    Stores all the tiles
-    private Tile[][] tileGrid = new Tile[levelHeight][levelWidth];
+    private final Tile[][] tileGrid = new Tile[levelHeight][levelWidth];
+//    Contains textures
+    private final Textures dict = new Textures();
 
     public Level() {
         for (int yTile = 0; yTile < tileGrid.length; yTile++) {
             for (int xTile = 0; xTile < tileGrid[0].length; xTile++) {
-                tileGrid[yTile][xTile] = new Tile(xTile * tileSize, yTile * tileSize, tileSize, tileSize, 0, 0);
+                tileGrid[yTile][xTile] = new Tile(xTile * tileSize, yTile * tileSize, tileSize, tileSize, 0, 0, dict);
             }
         }
     }
