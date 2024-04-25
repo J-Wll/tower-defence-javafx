@@ -8,15 +8,15 @@ import javafx.scene.paint.Color;
 
 public class Display extends Pane {
 
-    private static int width, height;
+    private static int WIDTH, HEIGHT;
     private final Level level = new Level();
     private final Canvas canvas;
     private final GraphicsContext gc;
 
     public Display(int x, int y) {
-        width = x;
-        height = y;
-        canvas = new Canvas(width, height);
+        WIDTH = x;
+        HEIGHT = y;
+        canvas = new Canvas(WIDTH, HEIGHT);
         gc = canvas.getGraphicsContext2D();
         getChildren().add(canvas);
     }
@@ -31,12 +31,15 @@ public class Display extends Pane {
 //                time in seconds
                 double t = (currentNanoTime - startNanoTime) / 1000000000.0;
 
-                gc.clearRect(0, 0, width, height);
+                gc.clearRect(0, 0, WIDTH, HEIGHT);
+
+                gc.setFill(Color.GREY);
+                gc.fillRect(0, 0, WIDTH, HEIGHT);
+
+                level.render(gc);
 
                 gc.setFill(Color.BLUE);
                 gc.fillRect(100 + t * 10, 100, 100, 100);
-
-                level.render(gc);
 
                 System.out.println(t);
 
