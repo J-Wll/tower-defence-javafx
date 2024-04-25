@@ -34,13 +34,7 @@ public class Tile extends Rectangle {
         gc.setFill(Color.GREEN);
         gc.fillRect(x * 2, y, width, height);
 
-        InputStream stream = null;
-        try {
-            stream = new FileInputStream("src/main/java/TowerDefenceGame/Resources/grassTexture.png");
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        Image image = new Image(stream);
+        Image image = new Image("/grassTexture.png");
         gc.drawImage(image, x, y, width, height);
     }
 
