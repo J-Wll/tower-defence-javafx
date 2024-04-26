@@ -5,14 +5,22 @@ import java.util.ArrayList;
 // Publishes events based on the values of hp, gold
 public class GameStatePublisher {
 
+    private static GameStatePublisher instance;
     private ArrayList<GameSubscriber> subscribers;
     private int hp;
     private int gold;
 
-    public GameStatePublisher(ArrayList<GameSubscriber> subscribers, int hp, int gold) {
+    private GameStatePublisher(ArrayList<GameSubscriber> subscribers, int hp, int gold) {
         this.subscribers = subscribers;
         this.hp = hp;
         this.gold = gold;
+    }
+
+    public static GameStatePublisher getInstance(ArrayList<GameSubscriber> subs, int hp, int gold) {
+        if (instance == null) {
+            instance = new GameStatePublisher(subs, hp, gold);
+        }
+        return instance;
     }
 
     public void subscribe(GameSubscriber s) {
