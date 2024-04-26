@@ -18,7 +18,7 @@ import javafx.scene.shape.Rectangle;
  *
  * @author user
  */
-public class Tile extends Rectangle {
+public class Tile {
 
     private int x, y, width, height, groundID, airID;
     private Textures dict;
@@ -33,6 +33,10 @@ public class Tile extends Rectangle {
         this.dict = dict;
     }
 
+    public void setGroundID(int groundID) {
+        this.groundID = groundID;
+    }
+
     public void render(GraphicsContext gc) {
 //        gc.setFill(Color.GREEN);
 //        gc.fillRect(x, y, width, height);
@@ -40,7 +44,7 @@ public class Tile extends Rectangle {
 //        System.out.println(dict.get(1));
 //        Image image = new Image(dict.get(1));
 //        Image image = new Image("/grassTexture.png");
-        gc.drawImage(Textures.getText().get(1), x, y, width, height);
+        gc.drawImage(Textures.getText().get(groundID), x, y, width, height);
     }
 
 }

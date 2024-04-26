@@ -1,5 +1,6 @@
 package TowerDefenceGame;
 
+import java.io.File;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,6 +11,7 @@ public class Display extends Pane {
 
     private static int WIDTH, HEIGHT;
     private final Level level = new Level();
+    private final Save save = new Save();
     private final Canvas canvas;
     private final GraphicsContext gc;
 
@@ -19,10 +21,16 @@ public class Display extends Pane {
         canvas = new Canvas(WIDTH, HEIGHT);
         gc = canvas.getGraphicsContext2D();
         getChildren().add(canvas);
+        save.loadSave(level, new File("./src/main/resources/level1.save"));
+
     }
 
     public void start() {
         final long startNanoTime = System.nanoTime();
+//        File file = new File("./src/main/resources");
+//        for (String fileNames : file.list()) {
+//            System.out.println(fileNames);
+//        }
 
 //        game loop
         new AnimationTimer() {
@@ -30,6 +38,7 @@ public class Display extends Pane {
             public void handle(long currentNanoTime) {
 //                time in seconds
                 double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+//                System.out.println(t);
 
                 gc.clearRect(0, 0, WIDTH, HEIGHT);
 
@@ -40,8 +49,6 @@ public class Display extends Pane {
 
                 gc.setFill(Color.BLUE);
                 gc.fillRect(100 + t * 10, 100, 100, 100);
-
-                System.out.println(t);
 
             }
         }.start();
