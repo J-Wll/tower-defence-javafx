@@ -48,7 +48,7 @@ public class Display extends Pane {
                 level.render(gc);
 
                 gc.setFill(Color.BLUE);
-                gc.fillRect(100 + t * 10, 100, 100, 100);
+                gc.fillRect(0 + (t * 50), 0, 10, 10);
 
             }
         }.start();
