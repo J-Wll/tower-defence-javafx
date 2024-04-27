@@ -37,14 +37,16 @@ public class Tile {
         this.groundID = groundID;
     }
 
-    public void render(GraphicsContext gc) {
-//        gc.setFill(Color.GREEN);
-//        gc.fillRect(x, y, width, height);
+    public void setAirID(int airID) {
+        this.airID = airID;
+    }
 
-//        System.out.println(dict.get(1));
-//        Image image = new Image(dict.get(1));
-//        Image image = new Image("/grassTexture.png");
+    public void render(GraphicsContext gc) {
         gc.drawImage(Textures.getText().get(groundID), x, y, width, height);
+        if (airID < 0) {
+            System.out.println("test");
+            gc.drawImage(Textures.getText().get(airID), x, y, width, height);
+        }
     }
 
 }
