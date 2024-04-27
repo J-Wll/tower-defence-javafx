@@ -24,6 +24,11 @@ public class Level {
     private Tile[][] tileGrid = new Tile[levelHeight][levelWidth];
 //    Contains textures
     private final Textures dict = new Textures();
+    private final int currentLevel = 1;
+//    Array of monsters
+    private final Monster[] monsters = new Monster[50 * currentLevel];
+    private int spawnThreshold = 100;
+    private int spawnCounter = 0;
 
     /**
      *
@@ -54,6 +59,25 @@ public class Level {
                 tileGrid[yTile][xTile] = new Tile(xTile * tileSize, yTile * tileSize, tileSize, tileSize, 1, 0, dict);
             }
         }
+
+        for (int i = 0; i < monsters.length; i++) {
+            monsters[i] = new Monster(this);
+        }
+    }
+
+    public void mobSpawner() {
+        if (spawnCounter >= spawnThreshold) {
+            spawnCounter = 0;
+            System.out.println("test");
+            for (Monster mon : monsters) {
+//                Could do a random num or some other system here for making mobs with dif ids
+                if (!mon.getAlive()) {
+                    mon.spawn(-10);
+                }
+            }
+        } else {
+            spawnCounter += 1;
+        }
     }
 
     /**
@@ -61,12 +85,20 @@ public class Level {
      * @param gc
      */
     public void render(GraphicsContext gc) {
+        mobSpawner();
         gc.setFill(Color.RED);
         gc.fillRect(100, 100, 100, 100);
 
         for (int yTile = 0; yTile < tileGrid.length; yTile++) {
             for (int xTile = 0; xTile < tileGrid[0].length; xTile++) {
                 tileGrid[yTile][xTile].render(gc);
+            }
+        }
+
+        for (Monster mon : monsters) {
+            if (mon.getAlive() == true) {
+                mon.render(gc);
+
             }
         }
     }

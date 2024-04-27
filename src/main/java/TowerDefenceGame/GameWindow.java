@@ -67,15 +67,14 @@ public class GameWindow extends Pane {
                 double t = (currentNanoTime - startNanoTime) / 1000000000.0;
 //                System.out.println(t);
 
-                Monster mon = new Monster(level);
-
                 gc.clearRect(0, 0, WIDTH, HEIGHT);
 
                 gc.setFill(Color.LIGHTGREY);
                 gc.fillRect(0, 0, WIDTH, HEIGHT);
 
                 level.render(gc);
-                mon.render(gc);
+//                Monster mon = new Monster(level);
+//                mon.render(gc);
 
                 gc.setFill(Color.BLUE);
                 gc.fillRect(0 + (t * 50), 0, 10, 30);

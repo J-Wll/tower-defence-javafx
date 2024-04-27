@@ -13,18 +13,19 @@ import javafx.scene.paint.Color;
  */
 public class Monster implements GameSubscriber {
 
-    private int x, y, width, height, textID;
+    private int x, y, width, height;
+    private int monID = -10;
     private Level level;
+    private Boolean alive = false;
 
     public Monster(Level level) {
         this.level = level;
-        spawn();
     }
 
     /**
      *
      */
-    public void spawn() {
+    public void spawn(int monID) {
         Tile[][] tileGrid = level.getTileGrid();
         for (int yTile = 0; yTile < tileGrid.length; yTile++) {
 //            Second int is the column 0 - 17, 2 = road
@@ -32,13 +33,15 @@ public class Monster implements GameSubscriber {
                 x = tileGrid[yTile][0].getX();
                 y = tileGrid[yTile][0].getY();
                 width = height = level.getTileSize();
+                this.monID = monID;
+                alive = true;
             }
 
         }
     }
 
     public void render(GraphicsContext gc) {
-        gc.drawImage(Textures.getText().get(-10), x, y, width, height);
+        gc.drawImage(Textures.getText().get(monID), x, y, width, height);
     }
 
     @Override
@@ -47,4 +50,9 @@ public class Monster implements GameSubscriber {
 
         }
     }
+
+    public Boolean getAlive() {
+        return alive;
+    }
+
 }
