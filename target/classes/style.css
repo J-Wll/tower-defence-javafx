@@ -1,0 +1,25 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 27 Apr 2024, 12:32:57
+    Author     : user
+*/
+
+.button{
+    -fx-min-height: 75px;
+    -fx-min-width: 60px;
+    
+    -fx-cursor: hand;
+    
+    -fx-background-color: gray;
+    
+    -fx-text-fill: white;
+    -fx-font-weight: bolder;
+    
+    -fx-boder-style: solid;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+}
+

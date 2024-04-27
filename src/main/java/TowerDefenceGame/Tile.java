@@ -23,6 +23,16 @@ public class Tile {
     private int x, y, width, height, groundID, airID;
     private Textures dict;
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param groundID
+     * @param airID
+     * @param dict
+     */
     public Tile(int x, int y, int width, int height, int groundID, int airID, Textures dict) {
         this.x = x;
         this.y = y;
@@ -33,14 +43,26 @@ public class Tile {
         this.dict = dict;
     }
 
+    /**
+     *
+     * @param groundID
+     */
     public void setGroundID(int groundID) {
         this.groundID = groundID;
     }
 
+    /**
+     *
+     * @param airID
+     */
     public void setAirID(int airID) {
         this.airID = airID;
     }
 
+    /**
+     *
+     * @param gc
+     */
     public void render(GraphicsContext gc) {
         gc.drawImage(Textures.getText().get(groundID), x, y, width, height);
         if (airID < 0) {

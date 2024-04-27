@@ -7,6 +7,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+/**
+ *
+ * @author user
+ */
 public class GameWindow extends Pane {
 
     private static int WIDTH, HEIGHT;
@@ -15,6 +19,11 @@ public class GameWindow extends Pane {
     private final Canvas canvas;
     private final GraphicsContext gc;
 
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public GameWindow(int x, int y) {
         WIDTH = x;
         HEIGHT = y;
@@ -25,6 +34,9 @@ public class GameWindow extends Pane {
 
     }
 
+    /**
+     *
+     */
     public void start() {
         final long startNanoTime = System.nanoTime();
 //        File file = new File("./src/main/resources");
@@ -42,7 +54,7 @@ public class GameWindow extends Pane {
 
                 gc.clearRect(0, 0, WIDTH, HEIGHT);
 
-                gc.setFill(Color.GREY);
+                gc.setFill(Color.LIGHTGREY);
                 gc.fillRect(0, 0, WIDTH, HEIGHT);
 
                 level.render(gc);

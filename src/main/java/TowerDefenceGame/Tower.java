@@ -1,11 +1,19 @@
 package TowerDefenceGame;
 
+/**
+ *
+ * @author user
+ */
 public class Tower implements GameSubscriber{
     private int baseDamage;
     private int damage;
     private int baseAttackSpeed;
     private int attackSpeed;
     
+    /**
+     *
+     * @param event
+     */
     public void update(String event){
 //        Temporary attack boost
         if ("lowHP".equals(event)){

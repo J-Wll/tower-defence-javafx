@@ -25,14 +25,25 @@ public class Level {
 //    Contains textures
     private final Textures dict = new Textures();
 
+    /**
+     *
+     * @return
+     */
     public Tile[][] getTileGrid() {
         return tileGrid;
     }
 
+    /**
+     *
+     * @param tg
+     */
     public void setTileGrid(Tile[][] tg) {
         this.tileGrid = tg;
     }
 
+    /**
+     *
+     */
     public Level() {
         for (int yTile = 0; yTile < tileGrid.length; yTile++) {
             for (int xTile = 0; xTile < tileGrid[0].length; xTile++) {
@@ -41,6 +52,10 @@ public class Level {
         }
     }
 
+    /**
+     *
+     * @param gc
+     */
     public void render(GraphicsContext gc) {
         gc.setFill(Color.RED);
         gc.fillRect(100, 100, 100, 100);

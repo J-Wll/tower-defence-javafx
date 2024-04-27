@@ -13,6 +13,11 @@ import java.util.*;
  */
 public class Save {
 
+    /**
+     *
+     * @param level
+     * @param loadPath
+     */
     public void loadSave(Level level, File loadPath) {
         Tile[][] tileGrid = level.getTileGrid();
         int counter = 0;
