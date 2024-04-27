@@ -28,16 +28,12 @@ public class Monster implements GameSubscriber {
 //    location relative to the tile grid
     private int xCord = 0;
     private int yCord = 0;
-    private boolean movedUp, movedDown, movedLeft, movedRight;
 
     public Monster(Level level) {
 
         this.level = level;
         this.tileGrid = level.getTileGrid();
         this.directionCheck = level.getTileSize();
-        movedUp = movedDown = movedLeft = false;
-        movedRight = true;
-
     }
 
     /**
@@ -60,47 +56,33 @@ public class Monster implements GameSubscriber {
 
     private void directionSwitch() {
 //            Changing direction logic
-        System.out.println(movedUp + " " + movedDown + " " + movedLeft + " " + movedRight);
         try {
-            if (!movedUp && tileGrid[yCord + 1][xCord].getGroundID() == 2) {
-                System.out.println("Down");
+            if (direction != up && tileGrid[yCord + 1][xCord].getGroundID() == 2) {
                 direction = down;
-                movedUp = movedLeft = movedRight = false;
-                movedDown = true;
                 return;
             }
         } catch (Exception e) {
             System.out.println("Down" + e);
         }
         try {
-            if (!movedDown && tileGrid[yCord - 1][xCord].getGroundID() == 2) {
-                System.out.println("Up");
+            if (direction != down && tileGrid[yCord - 1][xCord].getGroundID() == 2) {
                 direction = up;
-                movedDown = movedLeft = movedRight = false;
-                movedUp = true;
                 return;
             }
         } catch (Exception e) {
             System.out.println("Up" + e);
         }
-        System.out.println("right con: " + tileGrid[8][2].getGroundID());
         try {
-            if (!movedLeft && tileGrid[yCord][xCord + 1].getGroundID() == 2) {
-                System.out.println("Right");
+            if (direction != left && tileGrid[yCord][xCord + 1].getGroundID() == 2) {
                 direction = right;
-                movedDown = movedLeft = movedUp = false;
-                movedRight = true;
                 return;
             }
         } catch (Exception e) {
             System.out.println("Right" + e);
         }
         try {
-            if (!movedRight && tileGrid[yCord][xCord - 1].getGroundID() == 2) {
-                System.out.println("Left");
+            if (direction != right && tileGrid[yCord][xCord - 1].getGroundID() == 2) {
                 direction = left;
-                movedDown = movedRight = movedUp = false;
-                movedLeft = true;
                 return;
             }
         } catch (Exception e) {
