@@ -70,7 +70,6 @@ public class Tile {
     public void render(GraphicsContext gc) {
         gc.drawImage(Textures.getText().get(groundID), x, y, width, height);
         if (airID < 0) {
-            System.out.println("test");
             gc.drawImage(Textures.getText().get(airID), x, y, width, height);
         }
     }

@@ -22,7 +22,8 @@ public class Textures {
         dict.put(1, new Image("/grassTexture.png"));
         dict.put(2, new Image("/stoneTexture.png"));
 
-//        dict.put(-1, new Image("/emptyAir.png"));
+        dict.put(-1, new Image("/startFlagAir.png"));
+        dict.put(-2, new Image("/endFlagAir.png"));
         dict.put(-10, new Image("/monsterTexture1.png"));
     }
 

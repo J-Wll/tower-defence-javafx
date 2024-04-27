@@ -73,12 +73,6 @@ public class GameWindow extends Pane {
                 gc.fillRect(0, 0, WIDTH, HEIGHT);
 
                 level.render(gc);
-//                Monster mon = new Monster(level);
-//                mon.render(gc);
-
-                gc.setFill(Color.BLUE);
-                gc.fillRect(0 + (t * 50), 0, 10, 30);
-
             }
         }.start();
 
