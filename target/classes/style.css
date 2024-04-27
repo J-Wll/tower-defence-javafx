@@ -10,16 +10,36 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .button{
     -fx-min-height: 75px;
     -fx-min-width: 60px;
-    
+
     -fx-cursor: hand;
-    
+
     -fx-background-color: gray;
-    
+
+    -fx-font-size: 16px;
     -fx-text-fill: white;
     -fx-font-weight: bolder;
-    
+
     -fx-boder-style: solid;
     -fx-border-color: black;
     -fx-border-width: 3px;
 }
 
+.button:hover{
+    -fx-background-color: lightgray;
+    -fx-text-fill: black;
+}
+
+.label{
+    -fx-font-weight: bolder;
+    -fx-font-size: 20px;
+}
+
+.gold-lb{
+    -fx-text-fill: Gold;
+    -fx-stroke: red;
+}
+
+.hp-lb{
+    -fx-text-fill: rgb( 255 , 110 , 110 );
+    -fx-stroke: red;
+}

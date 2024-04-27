@@ -3,7 +3,6 @@ package TowerDefenceGame;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
@@ -24,17 +23,21 @@ public class App extends Application {
         stage.setTitle("Tower Defence");
 
         final var root = new Group();
-        final var game = new GameWindow(WIDTH, HEIGHT);
-        root.getChildren().add(game);
+        final var gameWindow = new GameWindow(WIDTH, HEIGHT);
+        root.getChildren().add(gameWindow);
 
-        final var shop = new Shop(root, game);
-        shop.render();
+//        Manages health and gold values, sends events relating to them
+        final var gameManager = GameStatePublisher.getInstance(100, 50);
+
+        final var shop = new Shop(gameWindow, gameManager);
+        shop.render(root);
+        gameManager.render(root);
 
         final var scene = new Scene(root, WIDTH, HEIGHT);
 
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 
-        game.start();
+        gameWindow.start();
         stage.setScene(scene);
         stage.show();
     }

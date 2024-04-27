@@ -13,35 +13,35 @@ import javafx.scene.control.Button;
  */
 public class Shop {
 
-    private GameWindow game;
-    private Group root;
+    private GameWindow gameWindow;
+    private GameStatePublisher gameManager;
 
-    public Shop(Group root, GameWindow game) {
-        this.game = game;
-        this.root = root;
+    public Shop(GameWindow gameWindow, GameStatePublisher gameManager) {
+        this.gameWindow = gameWindow;
+        this.gameManager = gameManager;
     }
 
-    public void render() {
-        int spacing = 80;
+    public void render(Group renderTo) {
+        int spacing = 100;
         Button button = new Button("Click Me");
         button.setLayoutY(680);
         button.setLayoutX(25);
-        root.getChildren().add(button);
+        renderTo.getChildren().add(button);
 
         Button button1 = new Button("Click Me");
         button1.setLayoutY(680);
         button1.setLayoutX(25 + spacing);
-        root.getChildren().add(button1);
+        renderTo.getChildren().add(button1);
 
         Button button2 = new Button("Click Me");
         button2.setLayoutY(680);
         button2.setLayoutX(25 + spacing * 2);
-        root.getChildren().add(button2);
+        renderTo.getChildren().add(button2);
 
         Button button3 = new Button("Click Me");
         button3.setLayoutY(680);
         button3.setLayoutX(25 + spacing * 3);
-        root.getChildren().add(button3);
+        renderTo.getChildren().add(button3);
     }
 
 }

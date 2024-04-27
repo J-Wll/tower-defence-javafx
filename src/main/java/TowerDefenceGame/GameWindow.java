@@ -2,8 +2,13 @@ package TowerDefenceGame;
 
 import java.io.File;
 import javafx.animation.AnimationTimer;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -28,10 +33,20 @@ public class GameWindow extends Pane {
         WIDTH = x;
         HEIGHT = y;
         canvas = new Canvas(WIDTH, HEIGHT);
+
+        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("Handling event " + event.getEventType());
+            }
+        };
+
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, handler);
         gc = canvas.getGraphicsContext2D();
+
+//        (calling get children of the pane)
         getChildren().add(canvas);
         save.loadSave(level, new File("./src/main/resources/level1.save"));
-
     }
 
     /**
