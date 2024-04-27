@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public class Display extends Pane {
+public class GameWindow extends Pane {
 
     private static int WIDTH, HEIGHT;
     private final Level level = new Level();
@@ -15,7 +15,7 @@ public class Display extends Pane {
     private final Canvas canvas;
     private final GraphicsContext gc;
 
-    public Display(int x, int y) {
+    public GameWindow(int x, int y) {
         WIDTH = x;
         HEIGHT = y;
         canvas = new Canvas(WIDTH, HEIGHT);

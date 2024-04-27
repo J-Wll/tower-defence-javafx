@@ -3,6 +3,7 @@ package TowerDefenceGame;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -15,8 +16,13 @@ public class App extends Application {
         stage.setTitle("Tower Defence");
 
         final var root = new Group();
-        final var screen = new Display(WIDTH, HEIGHT);
+        final var screen = new GameWindow(WIDTH, HEIGHT);
         root.getChildren().add(screen);
+
+        Button button = new Button("Click Me");
+        button.setLayoutY(750);
+        root.getChildren().add(button);
+
         final var scene = new Scene(root, WIDTH, HEIGHT);
 
         screen.start();
