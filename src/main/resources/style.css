@@ -40,6 +40,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 .hp-lb{
-    -fx-text-fill: rgb( 255 , 110 , 110 );
+    -fx-text-fill: rgb( 255 , 0 , 0 );
     -fx-stroke: red;
 }

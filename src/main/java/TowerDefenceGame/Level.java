@@ -41,6 +41,10 @@ public class Level {
         this.tileGrid = tg;
     }
 
+    public int getTileSize() {
+        return tileSize;
+    }
+
     /**
      *
      */

@@ -4,15 +4,7 @@
  */
 package TowerDefenceGame;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.HashMap;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 /**
  *
@@ -49,6 +41,18 @@ public class Tile {
      */
     public void setGroundID(int groundID) {
         this.groundID = groundID;
+    }
+
+    public int getGroundID() {
+        return groundID;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     /**

@@ -23,6 +23,7 @@ public class Textures {
         dict.put(2, new Image("/stoneTexture.png"));
 
 //        dict.put(-1, new Image("/emptyAir.png"));
+        dict.put(-10, new Image("/monsterTexture1.png"));
     }
 
     /**
@@ -34,14 +35,12 @@ public class Textures {
     }
 
 //    base layer counts up
-
     /**
      *
      */
     public int grassID = 1;
 
 //    layer 2 counts down
-
     /**
      *
      */
