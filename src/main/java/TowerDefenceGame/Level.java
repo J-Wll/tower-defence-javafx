@@ -26,7 +26,9 @@ public class Level {
     private final Textures dict = new Textures();
     private final int currentLevel = 1;
 //    Array of monsters
-    private final Monster[] monsters = new Monster[50 * currentLevel];
+    private final Monster[] monsters = new Monster[50 + (50 * currentLevel)];
+//    one for testing
+//    private final Monster[] monsters = new Monster[1];
     private int spawnThreshold = 100;
     private int spawnCounter = 0;
 
@@ -68,11 +70,11 @@ public class Level {
     public void mobSpawner() {
         if (spawnCounter >= spawnThreshold) {
             spawnCounter = 0;
-            System.out.println("test");
             for (Monster mon : monsters) {
 //                Could do a random num or some other system here for making mobs with dif ids
                 if (!mon.getAlive()) {
                     mon.spawn(-10);
+                    break;
                 }
             }
         } else {
@@ -98,6 +100,7 @@ public class Level {
         for (Monster mon : monsters) {
             if (mon.getAlive() == true) {
                 mon.render(gc);
+                mon.move();
 
             }
         }
