@@ -41,15 +41,4 @@ public class Textures {
         return dict;
     }
 
-//    base layer counts up
-    /**
-     *
-     */
-    public int grassID = 1;
-
-//    layer 2 counts down
-    /**
-     *
-     */
-    public int emptyID = -1;
 }

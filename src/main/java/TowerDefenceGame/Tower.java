@@ -1,29 +1,19 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package TowerDefenceGame;
+
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 /**
  *
  * @author user
  */
-public class Tower implements GameSubscriber{
-    private int baseDamage;
-    private int damage;
-    private int baseAttackSpeed;
-    private int attackSpeed;
-    
-    /**
-     *
-     * @param event
-     */
-    public void update(String event){
-//        Temporary attack boost
-        if ("lowHP".equals(event)){
-            damage *= 1.5;
-            attackSpeed *= 1.5;
-        }
-//        Reset attack
-        if ("normalHP".equals(event)){
-            damage = baseDamage;
-            attackSpeed = baseAttackSpeed;
-        }
-    }
+public interface Tower {
+
+    void attack();
+
+    int getValue();
 }

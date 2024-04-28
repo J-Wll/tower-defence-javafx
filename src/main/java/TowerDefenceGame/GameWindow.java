@@ -28,7 +28,7 @@ public class GameWindow extends Pane {
     private Boolean gameOverShown = false;
     private final Textures textures = new Textures();
     private Boolean mouseItemActive = false;
-    private Image mouseImage;
+    private Tower mouseTower;
     private double mouseX, mouseY;
     private final GameStatePublisher gameManager = GameStatePublisher.getInstance();
     private Group root;
@@ -53,10 +53,23 @@ public class GameWindow extends Pane {
 //                System.out.println("Handling event " + event.getEventType());
                 mouseX = event.getX();
                 mouseY = event.getY();
+
+//                If it's a click and in place mode
+                if ("MOUSE_CLICKED".equals(event.getEventType().toString()) && mouseItemActive && mouseY < 640) {
+                    Tile[][] tilegrid = level.getTileGrid();
+                    Tile clickedTile = tilegrid[(int) (mouseY / 64)][(int) (mouseX / 64)];
+                    if (clickedTile.getGroundID() != Values.path && clickedTile.getAirID() == Values.empty) {
+                        System.out.println(clickedTile.getGroundID());
+                        System.out.println(clickedTile.getAirID());
+                        clickedTile.setTower(mouseTower);
+                        mouseItemActive = false;
+                    }
+                }
             }
         };
 
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED, handler);
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
         gc = canvas.getGraphicsContext2D();
         level = new Level(gc, textures);
 
@@ -65,9 +78,9 @@ public class GameWindow extends Pane {
         save.loadSave(level, new File("./src/main/resources/level1.save"));
     }
 
-    public void setMouseItem(Boolean mouseItem, Image mouseImage) {
+    public void setMouseItem(Boolean mouseItem, Tower mouseTower) {
         this.mouseItemActive = mouseItem;
-        this.mouseImage = mouseImage;
+        this.mouseTower = mouseTower;
     }
 
     public Boolean getMouseItemActive() {
@@ -125,7 +138,7 @@ public class GameWindow extends Pane {
                 }
 
                 if (mouseItemActive) {
-                    gc.drawImage(mouseImage, mouseX - 32, mouseY - 32);
+                    gc.drawImage(textures.getText().get(mouseTower.getValue()), mouseX - 32, mouseY - 32);
                 }
             }
         }.start();

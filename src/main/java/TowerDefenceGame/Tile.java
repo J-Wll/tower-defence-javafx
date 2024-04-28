@@ -14,6 +14,7 @@ public class Tile {
 
     private int x, y, width, height, groundID, airID;
     private Textures dict;
+    private Tower tower;
 
     /**
      *
@@ -57,6 +58,11 @@ public class Tile {
 
     public int getY() {
         return y;
+    }
+
+    public void setTower(Tower t) {
+        this.tower = t;
+        this.airID = t.getValue();
     }
 
     /**

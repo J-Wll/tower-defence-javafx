@@ -54,16 +54,16 @@ public class Shop {
         towersLb.setLayoutX(buttonXStart);
         renderTo.getChildren().add(towersLb);
 
-        var tbutton = new ShopButton("Laser Tower\nCost 25 gold", buttonXStart, buttonYStart, Values.laserTower, 25);
+        var tbutton = new ShopButton("Laser Tower\nCost 25 gold", buttonXStart, buttonYStart, new TowerLaser(new TowerBase()), 25);
         renderTo.getChildren().add(tbutton);
 
-        var tbutton1 = new ShopButton("Flame Tower\nCost 50 gold", buttonXStart + spacing, buttonYStart, Values.flameTower, 50);
+        var tbutton1 = new ShopButton("Flame Tower\nCost 50 gold", buttonXStart + spacing, buttonYStart, new TowerFlame(new TowerBase()), 50);
         renderTo.getChildren().add(tbutton1);
 
-        var tbutton2 = new ShopButton("Behemoth Tower\nCost 100 gold", buttonXStart + spacing * 2, buttonYStart, Values.behemothTower, 100);
+        var tbutton2 = new ShopButton("Behemoth Tower\nCost 100 gold", buttonXStart + spacing * 2, buttonYStart, new TowerBehemoth(new TowerBase()), 100);
         renderTo.getChildren().add(tbutton2);
 
-        var tbutton3 = new ShopButton("Shotgun Laser Tower\nCost 100 gold", buttonXStart + spacing * 3, buttonYStart, Values.shotgunLaserTower, 100);
+        var tbutton3 = new ShopButton("Shotgun Laser Tower\nCost 100 gold", buttonXStart + spacing * 3, buttonYStart, new TowerShotgun(new TowerBase()), 100);
         renderTo.getChildren().add(tbutton3);
 
         Label powersLb = new Label("Power-ups");
@@ -85,7 +85,7 @@ public class Shop {
     private class ShopButton extends Button {
 
 //        tower buttons
-        public ShopButton(String content, int x, int y, int towerVal, int towerPrice) {
+        public ShopButton(String content, int x, int y, Tower tower, int towerPrice) {
             super(content);
             setLayoutX(x);
             setLayoutY(y);
@@ -94,9 +94,9 @@ public class Shop {
                     towerRefund();
                     gameWindow.setMouseItem(false, null);
                 } else if (gameManager.getGold() >= towerPrice) {
-                    spawning = towerVal;
+                    spawning = tower.getValue();
                     gameManager.decreaseGold(towerPrice);
-                    gameWindow.setMouseItem(true, textures.getText().get(towerVal));
+                    gameWindow.setMouseItem(true, tower);
                 }
             }
             );

@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
  */
 public class Monster implements GameSubscriber {
 
-    private double x, y, width, height;
+    private double x, y, width, height, health;
     private int monID = -10;
     private Level level;
     private Tile[][] tileGrid;
@@ -97,7 +97,6 @@ public class Monster implements GameSubscriber {
         }
 
 //        System.out.println("new tile" + " xCord: " + xCord + "  yCord: " + yCord);
-
         directionSwitch();
 
         walkCounter = 0;
