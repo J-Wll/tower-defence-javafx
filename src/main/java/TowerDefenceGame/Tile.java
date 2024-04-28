@@ -5,6 +5,7 @@
 package TowerDefenceGame;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -87,6 +88,7 @@ public class Tile {
             gc.drawImage(Textures.getText().get(airID), x, y, width, height);
             if (Values.DEBUG_MODE && tower != null) {
                 int attackRadius = tower.getAttackRadius();
+                gc.setStroke(Color.BLACK);
                 gc.strokeRect(x - attackRadius / 2, y - attackRadius / 2, width + attackRadius, height + attackRadius);
             }
         }

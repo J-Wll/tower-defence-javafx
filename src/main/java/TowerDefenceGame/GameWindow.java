@@ -33,12 +33,26 @@ public class GameWindow extends Pane {
     private final GameStatePublisher gameManager = GameStatePublisher.getInstance();
     private Group root;
 
+    private static GameWindow instance;
+
+    public static GameWindow getInstance(int x, int y, Group root) {
+        if (instance == null) {
+            instance = new GameWindow(x, y, root);
+        }
+        return instance;
+    }
+
+//    Version for acessing without args
+    public static GameWindow getInstance() {
+        return instance;
+    }
+
     /**
      *
      * @param x
      * @param y
      */
-    public GameWindow(int x, int y, Group root) {
+    private GameWindow(int x, int y, Group root) {
         WIDTH = x;
         HEIGHT = y;
         canvas = new Canvas(WIDTH, HEIGHT);
@@ -71,13 +85,16 @@ public class GameWindow extends Pane {
         };
 
         canvas.addEventHandler(MouseEvent.MOUSE_MOVED, handler);
+
         canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
         gc = canvas.getGraphicsContext2D();
         level = new Level(gc, textures);
 
 //        (calling get children of the pane)
-        getChildren().add(canvas);
-        save.loadSave(level, new File("./src/main/resources/level1.save"));
+        getChildren()
+                .add(canvas);
+        save.loadSave(level,
+                new File("./src/main/resources/level1.save"));
     }
 
     public void setMouseItem(Boolean mouseItem, Tower mouseTower) {
@@ -91,6 +108,10 @@ public class GameWindow extends Pane {
 
     public Textures getTextures() {
         return this.textures;
+    }
+
+    public GraphicsContext getGc() {
+        return gc;
     }
 
     private void showGameOver() {

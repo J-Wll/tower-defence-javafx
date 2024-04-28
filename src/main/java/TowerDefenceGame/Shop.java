@@ -54,16 +54,16 @@ public class Shop {
         towersLb.setLayoutX(buttonXStart);
         renderTo.getChildren().add(towersLb);
 
-        var tbutton = new ShopButton("Laser Tower\nCost 25 gold", buttonXStart, buttonYStart, new TowerLaser(new TowerBase()), 25);
+        var tbutton = new ShopButton("Laser Tower\nCost 25 gold", buttonXStart, buttonYStart, 25, "TowerLaser");
         renderTo.getChildren().add(tbutton);
 
-        var tbutton1 = new ShopButton("Flame Tower\nCost 50 gold", buttonXStart + spacing, buttonYStart, new TowerFlame(new TowerBase()), 50);
+        var tbutton1 = new ShopButton("Flame Tower\nCost 50 gold", buttonXStart + spacing, buttonYStart, 50, "TowerFlame");
         renderTo.getChildren().add(tbutton1);
 
-        var tbutton2 = new ShopButton("Behemoth Tower\nCost 100 gold", buttonXStart + spacing * 2, buttonYStart, new TowerBehemoth(new TowerBase()), 100);
+        var tbutton2 = new ShopButton("Behemoth Tower\nCost 100 gold", buttonXStart + spacing * 2, buttonYStart, 100, "TowerBehemoth");
         renderTo.getChildren().add(tbutton2);
 
-        var tbutton3 = new ShopButton("Shotgun Laser Tower\nCost 100 gold", buttonXStart + spacing * 3, buttonYStart, new TowerShotgun(new TowerBase()), 100);
+        var tbutton3 = new ShopButton("Shotgun Laser Tower\nCost 100 gold", buttonXStart + spacing * 3, buttonYStart, 100, "TowerShotgun");
         renderTo.getChildren().add(tbutton3);
 
         Label powersLb = new Label("Power-ups");
@@ -71,13 +71,13 @@ public class Shop {
         powersLb.setLayoutX(buttonXStart + spacing * 4 + 50);
         renderTo.getChildren().add(powersLb);
 
-        var lbutton = new ShopButton("0.25x current enemies speed\nCost 100 gold", buttonXStart + spacing * 4 + 50, buttonYStart, 100, "slow-power");
+        var lbutton = new ShopButton("0.25x current enemies speed\nCost 100 gold", buttonXStart + spacing * 4 + 50, buttonYStart, 100, "slow-power", true);
         renderTo.getChildren().add(lbutton);
 
-        var lbutton1 = new ShopButton("1.5x tower damage for 10s\nCost 100 gold", buttonXStart + spacing * 5 + 50, buttonYStart, 100, "damage-power");
+        var lbutton1 = new ShopButton("1.5x tower damage for 10s\nCost 100 gold", buttonXStart + spacing * 5 + 50, buttonYStart, 100, "damage-power", true);
         renderTo.getChildren().add(lbutton1);
 
-        var lbutton2 = new ShopButton("Buy 40 HP\nCost 100 gold", buttonXStart + spacing * 6 + 50, buttonYStart, 100, "hp-power");
+        var lbutton2 = new ShopButton("Buy 40 HP\nCost 100 gold", buttonXStart + spacing * 6 + 50, buttonYStart, 100, "hp-power", true);
         renderTo.getChildren().add(lbutton2);
 
     }
@@ -85,7 +85,8 @@ public class Shop {
     private class ShopButton extends Button {
 
 //        tower buttons
-        public ShopButton(String content, int x, int y, Tower tower, int towerPrice) {
+        public ShopButton(String content, int x, int y, int price, String towerName) {
+            // regular button init
             super(content);
             setLayoutX(x);
             setLayoutY(y);
@@ -93,9 +94,28 @@ public class Shop {
                 if (gameWindow.getMouseItemActive()) {
                     towerRefund();
                     gameWindow.setMouseItem(false, null);
-                } else if (gameManager.getGold() >= towerPrice) {
+                } else if (gameManager.getGold() >= price) {
+                    Tower tower;
+                    switch (towerName) {
+                        case "TowerLaser":
+                            tower = new TowerLaser(new TowerBase());
+                            break;
+                        case "TowerShotgun":
+                            tower = new TowerShotgun(new TowerBase());
+                            break;
+                        case "TowerBehemoth":
+                            tower = new TowerBehemoth(new TowerBase());
+                            break;
+                        case "TowerFlame":
+                            tower = new TowerFlame(new TowerBase());
+                            break;
+                        default:
+                            System.out.println("towername switch default triggered");
+                            tower = new TowerLaser(new TowerBase());
+
+                    }
                     spawning = tower.getValue();
-                    gameManager.decreaseGold(towerPrice);
+                    gameManager.decreaseGold(price);
                     gameWindow.setMouseItem(true, tower);
                 }
             }
@@ -103,7 +123,7 @@ public class Shop {
         }
 
 //        powerup buttons
-        public ShopButton(String content, int x, int y, int price, String event) {
+        public ShopButton(String content, int x, int y, int price, String event, Boolean power) {
             super(content);
             setLayoutX(x);
             setLayoutY(y);
