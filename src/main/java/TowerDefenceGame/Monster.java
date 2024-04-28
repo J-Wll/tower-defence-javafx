@@ -62,21 +62,6 @@ public class Monster implements GameSubscriber {
     }
 
     private void positionLogic() {
-//        If it's at the end of the track
-        try {
-            if (tileGrid[yCord][xCord].getAirID() == Values.end) {
-//                System.out.println("end                   " + this);
-                alive = false;
-                GameStatePublisher.getInstance().decreaseHp(1);
-            }
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-
-        if (!alive) {
-            return;
-        }
-
 //        increases cords to match with tile grid every time the movement hits the tilesize
         switch (direction) {
             case right:
@@ -91,6 +76,22 @@ public class Monster implements GameSubscriber {
             case down:
                 yCord += 1;
                 break;
+        }
+
+        //        If it's at the end of the track
+        try {
+            if (tileGrid[yCord][xCord].getAirID() == Values.end) {
+//                System.out.println("end                   " + this);
+                alive = false;
+                GameStatePublisher.getInstance().decreaseHp(1);
+                render();
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        if (!alive) {
+            return;
         }
 
         System.out.println("new tile" + " xCord: " + xCord + "  yCord: " + yCord);
@@ -169,15 +170,14 @@ public class Monster implements GameSubscriber {
     public void render() {
 //            System.out.println(this);
         gc.drawImage(Textures.getText().get(monID), x, y, width, height);
-
+        if (!alive) {
+            gc.drawImage(Textures.getText().get(Values.explode), x, y, width, height);
+        }
     }
 
-    public void explode() {
-//            System.out.println(this);
-        gc.drawImage(Textures.getText().get(Values.explode), x - 64, y, width, height);
-
-    }
-
+//    public void explode() {
+////            System.out.println(this);
+//    }
     @Override
     public void update(String event) {
         if ("lowHP".equals(event)) {

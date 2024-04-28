@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class App extends Application {
 
 //    1152 = 64*18
-    private final static int WIDTH = 1152, HEIGHT = 800;
+    private final static int WIDTH = 1152, HEIGHT = 830;
 
     /**
      *

@@ -75,6 +75,7 @@ public class GameStatePublisher {
     }
 
     public void render(Group renderTo) {
+        int rY = 645;
         Label goldLb = new Label();
         StringBinding goldTextBinding = Bindings.createStringBinding(
                 () -> "Gold: " + gold.get(),
@@ -82,8 +83,8 @@ public class GameStatePublisher {
         );
         goldLb.textProperty().bind(goldTextBinding);
         goldLb.getStyleClass().add("gold-lb");
-        goldLb.setLayoutY(30);
-        goldLb.setLayoutX(50);
+        goldLb.setLayoutY(rY);
+        goldLb.setLayoutX(25);
         renderTo.getChildren().add(goldLb);
 
         Label hpLb = new Label();
@@ -93,8 +94,8 @@ public class GameStatePublisher {
         );
         hpLb.textProperty().bind(hpTextBinding);
         hpLb.getStyleClass().add("hp-lb");
-        hpLb.setLayoutY(30);
-        hpLb.setLayoutX(1035);
+        hpLb.setLayoutY(rY);
+        hpLb.setLayoutX(1060);
         renderTo.getChildren().add(hpLb);
     }
 
@@ -135,6 +136,10 @@ public class GameStatePublisher {
      */
     public void setGold(int gold) {
         this.gold.set(gold);
+    }
+
+    public void decreaseGold(int decrease) {
+        setGold(gold.get() - decrease);
     }
 
 }
