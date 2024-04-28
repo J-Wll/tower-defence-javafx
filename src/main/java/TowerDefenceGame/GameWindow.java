@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 public class GameWindow extends Pane {
 
     private static int WIDTH, HEIGHT;
-    private final Level level = new Level();
+    private final Level level;
     private final Save save = new Save();
     private final Canvas canvas;
     private final GraphicsContext gc;
@@ -40,6 +40,7 @@ public class GameWindow extends Pane {
 
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, handler);
         gc = canvas.getGraphicsContext2D();
+        level = new Level(gc);
 
 //        (calling get children of the pane)
         getChildren().add(canvas);
@@ -71,7 +72,7 @@ public class GameWindow extends Pane {
                 gc.setFill(Color.LIGHTGREY);
                 gc.fillRect(0, 0, WIDTH, HEIGHT);
 
-                level.render(gc);
+                level.render();
             }
         }.start();
 

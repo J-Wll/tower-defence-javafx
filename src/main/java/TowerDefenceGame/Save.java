@@ -39,7 +39,7 @@ public class Save {
             }
             loadScanner.close();
         } catch (Exception e) {
-            System.err.println(e);
+            System.err.println("Save" + e);
             System.out.println("loadSave");
             System.out.println(counter);
         }

@@ -20,6 +20,7 @@ public class Values {
     public static int start = -1;
     public static int end = -2;
     public static int monster1 = -20;
+    public static int explode = -30;
 
 }
 

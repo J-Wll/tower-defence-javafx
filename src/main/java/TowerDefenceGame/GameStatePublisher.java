@@ -1,6 +1,10 @@
 package TowerDefenceGame;
 
 import java.util.ArrayList;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 
@@ -13,12 +17,12 @@ public class GameStatePublisher {
 
     private static GameStatePublisher instance;
     private ArrayList<GameSubscriber> subscribers;
-    private int hp;
-    private int gold;
+    private IntegerProperty hp;
+    private IntegerProperty gold;
 
     private GameStatePublisher(int hp, int gold) {
-        this.hp = hp;
-        this.gold = gold;
+        this.hp = new SimpleIntegerProperty(hp);
+        this.gold = new SimpleIntegerProperty(gold);
     }
 
     /**
@@ -28,10 +32,16 @@ public class GameStatePublisher {
      * @param gold
      * @return
      */
+//    Version intended for creating it
     public static GameStatePublisher getInstance(int hp, int gold) {
         if (instance == null) {
             instance = new GameStatePublisher(hp, gold);
         }
+        return instance;
+    }
+
+//    Version for acessing without args
+    public static GameStatePublisher getInstance() {
         return instance;
     }
 
@@ -65,13 +75,23 @@ public class GameStatePublisher {
     }
 
     public void render(Group renderTo) {
-        Label goldLb = new Label("Gold: " + Integer.toString(gold));
+        Label goldLb = new Label();
+        StringBinding goldTextBinding = Bindings.createStringBinding(
+                () -> "Gold: " + gold.get(),
+                gold
+        );
+        goldLb.textProperty().bind(goldTextBinding);
         goldLb.getStyleClass().add("gold-lb");
         goldLb.setLayoutY(30);
         goldLb.setLayoutX(50);
         renderTo.getChildren().add(goldLb);
 
-        Label hpLb = new Label("HP: " + Integer.toString(hp));
+        Label hpLb = new Label();
+        StringBinding hpTextBinding = Bindings.createStringBinding(
+                () -> "HP: " + hp.get(),
+                hp
+        );
+        hpLb.textProperty().bind(hpTextBinding);
         hpLb.getStyleClass().add("hp-lb");
         hpLb.setLayoutY(30);
         hpLb.setLayoutX(1035);
@@ -83,7 +103,7 @@ public class GameStatePublisher {
      * @return
      */
     public int getHp() {
-        return hp;
+        return hp.get();
     }
 
     /**
@@ -91,7 +111,14 @@ public class GameStatePublisher {
      * @param hp
      */
     public void setHp(int hp) {
-        this.hp = hp;
+        this.hp.set(hp);
+        System.out.println(hp);
+
+    }
+
+    public void decreaseHp(int damage) {
+//        calls sethp in case want to validate in there
+        setHp(hp.get() - damage);
     }
 
     /**
@@ -99,7 +126,7 @@ public class GameStatePublisher {
      * @return
      */
     public int getGold() {
-        return gold;
+        return gold.get();
     }
 
     /**
@@ -107,7 +134,7 @@ public class GameStatePublisher {
      * @param gold
      */
     public void setGold(int gold) {
-        this.gold = gold;
+        this.gold.set(gold);
     }
 
 }

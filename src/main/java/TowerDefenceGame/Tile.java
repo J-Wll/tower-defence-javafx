@@ -47,6 +47,10 @@ public class Tile {
         return groundID;
     }
 
+    public int getAirID() {
+        return airID;
+    }
+
     public int getX() {
         return x;
     }

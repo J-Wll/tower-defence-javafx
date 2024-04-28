@@ -17,23 +17,28 @@ public class Monster implements GameSubscriber {
     private int monID = -10;
     private Level level;
     private Tile[][] tileGrid;
+    private Boolean alreadySpawned = false;
     private Boolean alive = false;
 
 //    speed of movement, counter for movements, amount of moves that trigger direction check, direction states, current direction
-    private int moveSpeed = 2;
+    private int moveSpeed = 16;
     private int walkCounter = 0;
     private int directionCheck;
     private final int right = 0, left = 1, up = 2, down = 3;
     private int direction = right;
+
 //    location relative to the tile grid
     private int xCord = 0;
     private int yCord = 0;
 
-    public Monster(Level level) {
+    private final GraphicsContext gc;
+
+    public Monster(Level level, GraphicsContext gc) {
 
         this.level = level;
         this.tileGrid = level.getTileGrid();
         this.directionCheck = level.getTileSize();
+        this.gc = gc;
     }
 
     /**
@@ -48,10 +53,51 @@ public class Monster implements GameSubscriber {
                 yCord = yTile;
                 width = height = level.getTileSize();
                 this.monID = monID;
-                alive = true;
+                this.alive = true;
+                this.alreadySpawned = true;
+
             }
 
         }
+    }
+
+    private void positionLogic() {
+//        If it's at the end of the track
+        try {
+            if (tileGrid[yCord][xCord].getAirID() == Values.end) {
+//                System.out.println("end                   " + this);
+                alive = false;
+                GameStatePublisher.getInstance().decreaseHp(1);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        if (!alive) {
+            return;
+        }
+
+//        increases cords to match with tile grid every time the movement hits the tilesize
+        switch (direction) {
+            case right:
+                xCord += 1;
+                break;
+            case left:
+                xCord -= 1;
+                break;
+            case up:
+                yCord -= 1;
+                break;
+            case down:
+                yCord += 1;
+                break;
+        }
+
+        System.out.println("new tile" + " xCord: " + xCord + "  yCord: " + yCord);
+
+        directionSwitch();
+
+        walkCounter = 0;
     }
 
     private void directionSwitch() {
@@ -92,40 +138,18 @@ public class Monster implements GameSubscriber {
 
     public void move() {
 
-//        increases cords to match with tile grid every time the movement hits the tilesize
+//        runs whenever run counter >= tilesize (64)
         if (walkCounter >= directionCheck) {
-            switch (direction) {
-                case right:
-                    xCord += 1;
-                    break;
-                case left:
-                    xCord -= 1;
-                    break;
-                case up:
-                    yCord -= 1;
-                    break;
-                case down:
-                    yCord += 1;
-                    break;
-            }
-
-            if (xCord < 0) {
-                xCord = 0;
-            }
-            if (yCord < 0) {
-                yCord = 0;
-            }
-
-            System.out.println("new tile" + " xCord: " + xCord + "  yCord: " + yCord);
-
-            directionSwitch();
-
-            walkCounter = 0;
-
+//            Split off due to being large, this func also calls directionCheck;
+            positionLogic();
         }
 
+        if (!alive) {
+            return;
+        }
+
+//        Movement, runs every frame
         walkCounter += moveSpeed;
-//        moving
         switch (direction) {
             case right:
                 x += moveSpeed;
@@ -142,8 +166,16 @@ public class Monster implements GameSubscriber {
         }
     }
 
-    public void render(GraphicsContext gc) {
+    public void render() {
+//            System.out.println(this);
         gc.drawImage(Textures.getText().get(monID), x, y, width, height);
+
+    }
+
+    public void explode() {
+//            System.out.println(this);
+        gc.drawImage(Textures.getText().get(Values.explode), x - 64, y, width, height);
+
     }
 
     @Override
@@ -155,6 +187,10 @@ public class Monster implements GameSubscriber {
 
     public Boolean getAlive() {
         return alive;
+    }
+
+    public Boolean getAlreadySpawned() {
+        return alreadySpawned;
     }
 
 }

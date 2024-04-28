@@ -25,6 +25,7 @@ public class Textures {
         dict.put(Values.start, new Image("/startFlagAir.png"));
         dict.put(Values.end, new Image("/endFlagAir.png"));
         dict.put(Values.monster1, new Image("/monsterTexture1.png"));
+        dict.put(Values.explode, new Image("/explode.png"));
     }
 
     /**
