@@ -114,7 +114,6 @@ public class GameStatePublisher {
      */
     public void setHp(int hp) {
         this.hp.set(hp);
-        System.out.println(hp);
 
     }
 
