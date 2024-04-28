@@ -65,6 +65,10 @@ public class Tile {
         this.airID = t.getValue();
     }
 
+    public Tower getTower() {
+        return tower;
+    }
+
     /**
      *
      * @param airID
@@ -81,6 +85,10 @@ public class Tile {
         gc.drawImage(Textures.getText().get(groundID), x, y, width, height);
         if (airID < Values.empty) {
             gc.drawImage(Textures.getText().get(airID), x, y, width, height);
+            if (Values.DEBUG_MODE && tower != null) {
+                int attackRadius = tower.getAttackRadius();
+                gc.strokeRect(x - attackRadius / 2, y - attackRadius / 2, width + attackRadius, height + attackRadius);
+            }
         }
     }
 

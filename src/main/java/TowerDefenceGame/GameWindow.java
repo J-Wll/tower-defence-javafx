@@ -53,6 +53,7 @@ public class GameWindow extends Pane {
 //                System.out.println("Handling event " + event.getEventType());
                 mouseX = event.getX();
                 mouseY = event.getY();
+//                System.out.println(mouseX + " : " + mouseY);
 
 //                If it's a click and in place mode
                 if ("MOUSE_CLICKED".equals(event.getEventType().toString()) && mouseItemActive && mouseY < 640) {
@@ -62,6 +63,7 @@ public class GameWindow extends Pane {
                         System.out.println(clickedTile.getGroundID());
                         System.out.println(clickedTile.getAirID());
                         clickedTile.setTower(mouseTower);
+                        mouseTower.setPos(clickedTile.getX(), clickedTile.getY());
                         mouseItemActive = false;
                     }
                 }

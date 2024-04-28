@@ -13,7 +13,13 @@ import javafx.scene.image.Image;
  */
 public interface Tower {
 
-    void attack();
+    void attack(Monster[] monsters);
 
     int getValue();
+
+    void update(String event);
+
+    int getAttackRadius();
+
+    void setPos(int x, int y);
 }

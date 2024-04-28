@@ -101,6 +101,22 @@ public class Level {
         for (int yTile = 0; yTile < tileGrid.length; yTile++) {
             for (int xTile = 0; xTile < tileGrid[0].length; xTile++) {
                 tileGrid[yTile][xTile].render(gc);
+                if (tileGrid[yTile][xTile].getTower() != null) {
+                    Tile currentTile = tileGrid[yTile][xTile];
+                    currentTile.getTower().attack(monsters);
+                }
+            }
+        }
+
+//        If debug mode, renders an extra time to see bounding box on top
+        if (Values.DEBUG_MODE) {
+            for (int yTile = 0; yTile < tileGrid.length; yTile++) {
+                for (int xTile = 0; xTile < tileGrid[0].length; xTile++) {
+                    if (tileGrid[yTile][xTile].getTower() != null) {
+                        tileGrid[yTile][xTile].render(gc);
+                    }
+
+                }
             }
         }
 

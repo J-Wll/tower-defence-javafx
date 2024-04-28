@@ -14,6 +14,12 @@ package TowerDefenceGame;
 // < 0 is the air layer, or anything rendering above the ground
 public class Values {
 
+//    Toggle between 0 and 1 for debug
+    public static final Boolean DEBUG_MODE = true;
+
+    public static final int tileSize = 64;
+
+//    For logic and accessing textures
     public static final int empty = 0;
     public static final int grass = 1;
     public static final int path = 2;
