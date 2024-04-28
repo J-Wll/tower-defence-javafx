@@ -23,6 +23,7 @@ public class GameStatePublisher {
     private GameStatePublisher(int hp, int gold) {
         this.hp = new SimpleIntegerProperty(hp);
         this.gold = new SimpleIntegerProperty(gold);
+        this.subscribers = new ArrayList();
     }
 
     /**
@@ -122,6 +123,10 @@ public class GameStatePublisher {
         setHp(hp.get() - damage);
     }
 
+    public void increaseHp(int increase) {
+        setHp(hp.get() + increase);
+    }
+
     /**
      *
      * @return
@@ -140,6 +145,10 @@ public class GameStatePublisher {
 
     public void decreaseGold(int decrease) {
         setGold(gold.get() - decrease);
+    }
+
+    public void increaseGold(int increase) {
+        setGold(gold.get() + increase);
     }
 
 }

@@ -6,6 +6,7 @@ package TowerDefenceGame;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.HashMap;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -22,8 +23,6 @@ public class Level {
     private final int tileSize = 64;
 //    Stores all the tiles
     private Tile[][] tileGrid = new Tile[levelHeight][levelWidth];
-//    Contains textures
-    private final Textures dict = new Textures();
     private final int currentLevel = 1;
 //    Array of monsters
     private final Monster[] monsters = new Monster[50 + (50 * currentLevel)];
@@ -33,6 +32,8 @@ public class Level {
     private int spawnThreshold = 100;
     private int spawnCounter = spawnThreshold;
     private final GraphicsContext gc;
+    private final Textures textures;
+    private final GameStatePublisher gameManager = GameStatePublisher.getInstance();
 
     /**
      *
@@ -57,12 +58,13 @@ public class Level {
     /**
      *
      */
-    public Level(GraphicsContext gc) {
+    public Level(GraphicsContext gc, Textures textures) {
         this.gc = gc;
+        this.textures = textures;
 
         for (int yTile = 0; yTile < tileGrid.length; yTile++) {
             for (int xTile = 0; xTile < tileGrid[0].length; xTile++) {
-                tileGrid[yTile][xTile] = new Tile(xTile * tileSize, yTile * tileSize, tileSize, tileSize, Values.grass, Values.empty, dict);
+                tileGrid[yTile][xTile] = new Tile(xTile * tileSize, yTile * tileSize, tileSize, tileSize, Values.grass, Values.empty, textures);
             }
         }
 
@@ -78,6 +80,7 @@ public class Level {
 //                Could do a random num or some other system here for making mobs with dif ids
                 if (!mon.getAlive() && !mon.getAlreadySpawned()) {
                     mon.spawn(Values.monster1);
+                    gameManager.subscribe(mon);
                     break;
                 }
             }

@@ -26,6 +26,11 @@ public class Textures {
         dict.put(Values.end, new Image("/endFlagAir.png"));
         dict.put(Values.monster1, new Image("/monsterTexture1.png"));
         dict.put(Values.explode, new Image("/explode.png"));
+        dict.put(Values.laserTower, new Image("/laserTower.png"));
+        dict.put(Values.flameTower, new Image("/flameTower.png"));
+        dict.put(Values.behemothTower, new Image("/behemothTower.png"));
+        dict.put(Values.shotgunLaserTower, new Image("/shotgunLaserTower.png"));
+
     }
 
     /**

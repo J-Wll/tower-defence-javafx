@@ -5,6 +5,7 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -20,6 +21,10 @@ public class GameWindow extends Pane {
     private final Save save = new Save();
     private final Canvas canvas;
     private final GraphicsContext gc;
+    private final Textures textures = new Textures();
+    private Boolean mouseItemActive = false;
+    private Image mouseImage;
+    private double mouseX, mouseY;
 
     /**
      *
@@ -34,17 +39,32 @@ public class GameWindow extends Pane {
         EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("Handling event " + event.getEventType());
+//                System.out.println("Handling event " + event.getEventType());
+                mouseX = event.getX();
+                mouseY = event.getY();
             }
         };
 
-        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, handler);
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, handler);
         gc = canvas.getGraphicsContext2D();
-        level = new Level(gc);
+        level = new Level(gc, textures);
 
 //        (calling get children of the pane)
         getChildren().add(canvas);
         save.loadSave(level, new File("./src/main/resources/level1.save"));
+    }
+
+    public void setMouseItem(Boolean mouseItem, Image mouseImage) {
+        this.mouseItemActive = mouseItem;
+        this.mouseImage = mouseImage;
+    }
+
+    public Boolean getMouseItemActive() {
+        return mouseItemActive;
+    }
+
+    public Textures getTextures() {
+        return this.textures;
     }
 
     /**
@@ -73,6 +93,10 @@ public class GameWindow extends Pane {
                 gc.fillRect(0, 0, WIDTH, HEIGHT);
 
                 level.render();
+
+                if (mouseItemActive) {
+                    gc.drawImage(mouseImage, mouseX - 32, mouseY - 32);
+                }
             }
         }.start();
 

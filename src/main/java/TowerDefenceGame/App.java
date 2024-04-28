@@ -13,6 +13,7 @@ public class App extends Application {
 
 //    1152 = 64*18
     private final static int WIDTH = 1152, HEIGHT = 830;
+    private final static int STARTHP = 100, STARTGOLD = 500;
 
     /**
      *
@@ -25,7 +26,7 @@ public class App extends Application {
         final var root = new Group();
 
 //        Manages health and gold values, sends events relating to them
-        final var gameManager = GameStatePublisher.getInstance(100, 50);
+        final var gameManager = GameStatePublisher.getInstance(STARTHP, STARTGOLD);
 
         final var gameWindow = new GameWindow(WIDTH, HEIGHT);
         root.getChildren().add(gameWindow);

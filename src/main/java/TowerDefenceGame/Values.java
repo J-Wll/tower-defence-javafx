@@ -14,13 +14,17 @@ package TowerDefenceGame;
 // < 0 is the air layer, or anything rendering above the ground
 public class Values {
 
-    public static int empty = 0;
-    public static int grass = 1;
-    public static int path = 2;
-    public static int start = -1;
-    public static int end = -2;
-    public static int monster1 = -20;
-    public static int explode = -30;
+    public static final int empty = 0;
+    public static final int grass = 1;
+    public static final int path = 2;
+    public static final int start = -1;
+    public static final int end = -2;
+    public static final int laserTower = -3;
+    public static final int flameTower = -4;
+    public static final int behemothTower = -5;
+    public static final int shotgunLaserTower = -6;
+    public static final int monster1 = -20;
+    public static final int explode = -30;
 
 }
 
