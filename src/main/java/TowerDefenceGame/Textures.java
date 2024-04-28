@@ -19,12 +19,12 @@ public class Textures {
      *
      */
     public Textures() {
-        dict.put(1, new Image("/grassTexture.png"));
-        dict.put(2, new Image("/stoneTexture.png"));
+        dict.put(Values.grass, new Image("/grassTexture.png"));
+        dict.put(Values.path, new Image("/stoneTexture.png"));
 
-        dict.put(-1, new Image("/startFlagAir.png"));
-        dict.put(-2, new Image("/endFlagAir.png"));
-        dict.put(-10, new Image("/monsterTexture1.png"));
+        dict.put(Values.start, new Image("/startFlagAir.png"));
+        dict.put(Values.end, new Image("/endFlagAir.png"));
+        dict.put(Values.monster1, new Image("/monsterTexture1.png"));
     }
 
     /**

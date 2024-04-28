@@ -42,7 +42,7 @@ public class Monster implements GameSubscriber {
     public void spawn(int monID) {
         for (int yTile = 0; yTile < tileGrid.length; yTile++) {
 //            Second int is the column 0 - 17, 2 = road
-            if (tileGrid[yTile][0].getGroundID() == 2) {
+            if (tileGrid[yTile][0].getGroundID() == Values.path) {
                 x = tileGrid[yTile][0].getX();
                 y = tileGrid[yTile][0].getY();
                 yCord = yTile;
@@ -57,7 +57,7 @@ public class Monster implements GameSubscriber {
     private void directionSwitch() {
 //            Changing direction logic
         try {
-            if (direction != up && tileGrid[yCord + 1][xCord].getGroundID() == 2) {
+            if (direction != up && tileGrid[yCord + 1][xCord].getGroundID() == Values.path) {
                 direction = down;
                 return;
             }
@@ -65,7 +65,7 @@ public class Monster implements GameSubscriber {
             System.out.println("Down" + e);
         }
         try {
-            if (direction != down && tileGrid[yCord - 1][xCord].getGroundID() == 2) {
+            if (direction != down && tileGrid[yCord - 1][xCord].getGroundID() == Values.path) {
                 direction = up;
                 return;
             }
@@ -73,7 +73,7 @@ public class Monster implements GameSubscriber {
             System.out.println("Up" + e);
         }
         try {
-            if (direction != left && tileGrid[yCord][xCord + 1].getGroundID() == 2) {
+            if (direction != left && tileGrid[yCord][xCord + 1].getGroundID() == Values.path) {
                 direction = right;
                 return;
             }
@@ -81,7 +81,7 @@ public class Monster implements GameSubscriber {
             System.out.println("Right" + e);
         }
         try {
-            if (direction != right && tileGrid[yCord][xCord - 1].getGroundID() == 2) {
+            if (direction != right && tileGrid[yCord][xCord - 1].getGroundID() == Values.path) {
                 direction = left;
                 return;
             }

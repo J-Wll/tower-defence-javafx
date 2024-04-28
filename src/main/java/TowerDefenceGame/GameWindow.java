@@ -2,12 +2,9 @@ package TowerDefenceGame;
 
 import java.io.File;
 import javafx.animation.AnimationTimer;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -54,6 +51,7 @@ public class GameWindow extends Pane {
      */
     public void start() {
         final long startNanoTime = System.nanoTime();
+//        testing for fiding filepaths
 //        File file = new File("./src/main/resources");
 //        for (String fileNames : file.list()) {
 //            System.out.println(fileNames);
@@ -69,6 +67,7 @@ public class GameWindow extends Pane {
 
                 gc.clearRect(0, 0, WIDTH, HEIGHT);
 
+//                background
                 gc.setFill(Color.LIGHTGREY);
                 gc.fillRect(0, 0, WIDTH, HEIGHT);
 

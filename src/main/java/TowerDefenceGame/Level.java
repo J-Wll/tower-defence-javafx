@@ -58,7 +58,7 @@ public class Level {
     public Level() {
         for (int yTile = 0; yTile < tileGrid.length; yTile++) {
             for (int xTile = 0; xTile < tileGrid[0].length; xTile++) {
-                tileGrid[yTile][xTile] = new Tile(xTile * tileSize, yTile * tileSize, tileSize, tileSize, 1, 0, dict);
+                tileGrid[yTile][xTile] = new Tile(xTile * tileSize, yTile * tileSize, tileSize, tileSize, Values.grass, Values.empty, dict);
             }
         }
 
@@ -73,7 +73,7 @@ public class Level {
             for (Monster mon : monsters) {
 //                Could do a random num or some other system here for making mobs with dif ids
                 if (!mon.getAlive()) {
-                    mon.spawn(-10);
+                    mon.spawn(Values.monster1);
                     break;
                 }
             }
