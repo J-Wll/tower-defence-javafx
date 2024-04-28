@@ -3,8 +3,10 @@ package TowerDefenceGame;
 import java.io.File;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -21,20 +23,29 @@ public class GameWindow extends Pane {
     private final Save save = new Save();
     private final Canvas canvas;
     private final GraphicsContext gc;
+    private final Canvas gameOverCanvas;
+    private final GraphicsContext gameOverGc;
+    private Boolean gameOverShown = false;
     private final Textures textures = new Textures();
     private Boolean mouseItemActive = false;
     private Image mouseImage;
     private double mouseX, mouseY;
+    private final GameStatePublisher gameManager = GameStatePublisher.getInstance();
+    private Group root;
 
     /**
      *
      * @param x
      * @param y
      */
-    public GameWindow(int x, int y) {
+    public GameWindow(int x, int y, Group root) {
         WIDTH = x;
         HEIGHT = y;
         canvas = new Canvas(WIDTH, HEIGHT);
+        gameOverCanvas = new Canvas(WIDTH, HEIGHT);
+        gameOverGc = gameOverCanvas.getGraphicsContext2D();
+
+        this.root = root;
 
         EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
             @Override
@@ -67,6 +78,21 @@ public class GameWindow extends Pane {
         return this.textures;
     }
 
+    private void showGameOver() {
+        if (!gameOverShown) {
+            var label = new Label("GAME OVER\nThanks for playing");
+            label.setStyle("-fx-text-fill: white");
+            label.setLayoutX(50);
+            label.setLayoutY(50);
+            root.getChildren().add(gameOverCanvas);
+            gameOverShown = true;
+            root.getChildren().add(label);
+        }
+        gameOverGc.clearRect(0, 0, WIDTH, HEIGHT);
+        gc.setFill(Color.WHITE);
+        gameOverGc.fillRect(0, 0, WIDTH, HEIGHT);
+    }
+
     /**
      *
      */
@@ -92,7 +118,11 @@ public class GameWindow extends Pane {
                 gc.setFill(Color.LIGHTGREY);
                 gc.fillRect(0, 0, WIDTH, HEIGHT);
 
-                level.render();
+                if (gameManager.getHp() <= 0) {
+                    showGameOver();
+                } else {
+                    level.render();
+                }
 
                 if (mouseItemActive) {
                     gc.drawImage(mouseImage, mouseX - 32, mouseY - 32);
