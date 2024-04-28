@@ -71,7 +71,7 @@ public class Shop {
         powersLb.setLayoutX(buttonXStart + spacing * 4 + 50);
         renderTo.getChildren().add(powersLb);
 
-        var lbutton = new ShopButton("1/2 current enemies speed\nCost 100 gold", buttonXStart + spacing * 4 + 50, buttonYStart, 100, "slow-power");
+        var lbutton = new ShopButton("0.25x current enemies speed\nCost 100 gold", buttonXStart + spacing * 4 + 50, buttonYStart, 100, "slow-power");
         renderTo.getChildren().add(lbutton);
 
         var lbutton1 = new ShopButton("1.5x tower damage for 10s\nCost 100 gold", buttonXStart + spacing * 5 + 50, buttonYStart, 100, "damage-power");

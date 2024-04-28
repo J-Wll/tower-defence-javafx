@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
  */
 public class Monster implements GameSubscriber {
     
-    private int x, y, width, height;
+    private double x, y, width, height;
     private int monID = -10;
     private Level level;
     private Tile[][] tileGrid;
@@ -21,7 +21,7 @@ public class Monster implements GameSubscriber {
     private Boolean alive = false;
 
 //    speed of movement, counter for movements, amount of moves that trigger direction check, direction states, current direction
-    private int moveSpeed = 4;
+    private double moveSpeed = 4;
     private int walkCounter = 0;
     private int directionCheck;
     private final int right = 0, left = 1, up = 2, down = 3;
@@ -186,7 +186,7 @@ public class Monster implements GameSubscriber {
             
         }
         if ("slow-power".equals(event)) {
-            moveSpeed /= 2;
+            moveSpeed *= 0.25;
         }
     }
     
