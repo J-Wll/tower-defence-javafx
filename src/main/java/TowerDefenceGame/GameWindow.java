@@ -2,7 +2,10 @@ package TowerDefenceGame;
 
 import java.io.File;
 import java.util.HashSet;
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
@@ -12,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 /**
  *
@@ -35,7 +39,7 @@ public class GameWindow extends Pane {
     private final Group root;
     private App app;
 
-    private AnimationTimer animationTimer;
+    private Timeline gameLoop;
     EventHandler<MouseEvent> handler;
     private int endLevelCounter = 0;
 
@@ -80,7 +84,7 @@ public class GameWindow extends Pane {
      *
      */
     public void clean() {
-        animationTimer.stop();
+        gameLoop.stop();
         handler = null;
     }
 
@@ -231,13 +235,9 @@ public class GameWindow extends Pane {
 //        }
 
 //        game loop
-        animationTimer = new AnimationTimer() {
-            @Override
-            public void handle(long currentNanoTime) {
-                update();
-            }
-        };
-        animationTimer.start();
+        gameLoop = new Timeline(new KeyFrame(Duration.millis(1000.0 / 60), u -> update()));
+        gameLoop.setCycleCount(Animation.INDEFINITE);
+        gameLoop.play();
         shop.render(root);
         gameManager.render(root);
     }
