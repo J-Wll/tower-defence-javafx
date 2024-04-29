@@ -146,14 +146,26 @@ public class TowerBase implements GameSubscriber {
         this.y = y;
     }
 
+    /**
+     *
+     * @param attackColor
+     */
     public void setAttackColor(Color attackColor) {
         this.attackColor = attackColor;
     }
 
+    /**
+     *
+     * @param attackWidth
+     */
     public void setAttackWidth(int attackWidth) {
         this.attackWidth = attackWidth;
     }
 
+    /**
+     *
+     * @param special
+     */
     public void setSpecial(String special) {
         this.special = special;
     }

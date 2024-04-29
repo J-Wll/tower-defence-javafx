@@ -1,6 +1,7 @@
 package TowerDefenceGame;
 
 import java.io.File;
+import java.util.HashSet;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -24,9 +25,7 @@ public class GameWindow extends Pane {
     private final Save save = new Save();
     private final Canvas canvas;
     private final GraphicsContext gc;
-    private final Canvas gameOverCanvas;
-    private final GraphicsContext gameOverGc;
-    private Boolean gameOverShown = false;
+    private Boolean endLevelShown = false;
     private final Textures textures = new Textures();
     private Boolean mouseItemActive = false;
     private Tower mouseTower;
@@ -38,7 +37,7 @@ public class GameWindow extends Pane {
 
     private AnimationTimer animationTimer;
     EventHandler<MouseEvent> handler;
-    private int gameOverCounter = 0;
+    private int endLevelCounter = 0;
 
     private static GameWindow instance = null;
 
@@ -47,6 +46,10 @@ public class GameWindow extends Pane {
      * @param x
      * @param y
      * @param root
+     * @param STARTHP
+     * @param STARTGOLD
+     * @param app
+     * @param currentLevel
      * @return
      */
     public static GameWindow getInstance(int x, int y, Group root, int STARTHP, int STARTGOLD, App app, int currentLevel) {
@@ -65,11 +68,17 @@ public class GameWindow extends Pane {
         return instance;
     }
 
+    /**
+     *
+     */
     public static void deleteInstance() {
         instance = null;
         GameStatePublisher.deleteInstance();
     }
 
+    /**
+     *
+     */
     public void clean() {
         animationTimer.stop();
         handler = null;
@@ -84,10 +93,6 @@ public class GameWindow extends Pane {
         WIDTH = x;
         HEIGHT = y;
         canvas = new Canvas(WIDTH, HEIGHT);
-
-        gameOverCanvas = new Canvas(WIDTH, HEIGHT);
-        gameOverGc = gameOverCanvas.getGraphicsContext2D();
-
         this.currentLevel = currentLevel;
         this.app = app;
 
@@ -126,14 +131,13 @@ public class GameWindow extends Pane {
         canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
         gc = canvas.getGraphicsContext2D();
         level = new Level(gc, textures);
-        this.gameOverCounter = 0;
+        this.endLevelCounter = 0;
 
 //        (calling get children of the pane)
-        getChildren()
-                .add(canvas);
+        getChildren().add(canvas);
 
-        save.loadSave(level,
-                new File("./src/main/resources/level" + currentLevel + ".save"));
+        File saveFile = new File("./src/main/resources/level" + currentLevel + ".save");
+        save.loadSave(level, saveFile);
 
     }
 
@@ -171,29 +175,33 @@ public class GameWindow extends Pane {
         return gc;
     }
 
-    private void showGameOver() {
-        if (!gameOverShown) {
-            root.getChildren().clear();
-            var label = new Label("GAME OVER\nThanks for playing\nRestarting at level 1.....");
-            label.setStyle("-fx-text-fill: white");
-            label.setLayoutX(50);
-            label.setLayoutY(50);
-            root.getChildren().add(gameOverCanvas);
-            gameOverShown = true;
-            root.getChildren().add(label);
+    /**
+     *
+     * @param level
+     * @param text
+     */
+    public void newLevel(int level, String text) {
+//
+//        if (!endLevelShown) {
+//            root.getChildren().clear();
+//            var label = new Label(text);
+//            label.setStyle("-fx-text-fill: white");
+//            label.setLayoutX(50);
+//            label.setLayoutY(50);
+//            root.getChildren().add(endLevelCanvas);
+//            endLevelShown = true;
+//            root.getChildren().add(label);
+//
+//        }
 
-        }
-        gameOverGc.clearRect(0, 0, WIDTH, HEIGHT);
-        gc.setFill(Color.WHITE);
-        gameOverGc.fillRect(0, 0, WIDTH, HEIGHT);
+//        endLevelCounter += 1;
+//        System.out.println(endLevelCounter);
+//        if (endLevelCounter > 150) {
+        app.setLevel(level, text);
 
-        gameOverCounter += 1;
-//        System.out.println(gameOverCounter);
-        if (gameOverCounter > 150) {
-            app.setLevel(1);
-            gameOverCounter = 0;
-        }
     }
+//            endLevelCounter = 0;
+//        }
 
     /**
      *
@@ -221,7 +229,7 @@ public class GameWindow extends Pane {
                 gc.fillRect(0, 0, WIDTH, HEIGHT);
 
                 if (gameManager.getHp() <= 0) {
-                    showGameOver();
+                    newLevel(1, "GAME OVER\nThanks for playing\nRestarting at level 1.....");
                 } else {
                     level.render();
                 }

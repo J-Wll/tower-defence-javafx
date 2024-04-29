@@ -36,6 +36,7 @@ public class GameStatePublisher {
      *
      * @param hp
      * @param gold
+     * @param currentLevel
      * @return
      */
 //    Version intended for creating it
@@ -55,6 +56,9 @@ public class GameStatePublisher {
         return instance;
     }
 
+    /**
+     *
+     */
     public static void deleteInstance() {
         instance = null;
     }
@@ -102,6 +106,25 @@ public class GameStatePublisher {
         Label goldLb = new AutoLabel(goldTextBinding, "gold-lb", 25, rY);
         renderTo.getChildren().add(goldLb);
 
+        Label levelLb = new Label("Current level: " + this.currentLevel);
+        levelLb.setLayoutX(200);
+        levelLb.setLayoutY(rY);
+        renderTo.getChildren().add(levelLb);
+
+        StringBinding remainingBinding = Bindings.createStringBinding(
+                () -> "Enemies remaining: " + remaining.get(),
+                remaining
+        );
+        Label remainingLb = new AutoLabel(remainingBinding, "rm-lb", 450, rY);
+        renderTo.getChildren().add(remainingLb);
+
+        StringBinding intensityBinding = Bindings.createStringBinding(
+                () -> "Intensity factor: " + intensity.get(),
+                intensity
+        );
+        Label intensityLb = new AutoLabel(intensityBinding, "in-lb", 775, rY);
+        renderTo.getChildren().add(intensityLb);
+
         StringBinding hpTextBinding = Bindings.createStringBinding(
                 () -> "HP: " + hp.get(),
                 hp
@@ -109,9 +132,6 @@ public class GameStatePublisher {
         Label hpLb = new AutoLabel(hpTextBinding, "hp-lb", 1060, rY);
         renderTo.getChildren().add(hpLb);
 
-        Label levelLb = new Label("Current level: " + this.currentLevel);
-        Label intensityLb = new Label("Intensity factor: ");
-        Label remainingLb = new Label("Enemies remaining: ");
     }
 
     /**
@@ -129,6 +149,37 @@ public class GameStatePublisher {
     public void setHp(int hp) {
         this.hp.set(hp);
 
+        if (this.hp.get() <= 0) {
+            GameWindow.getInstance().newLevel(1, "YOU LOSE\nGAME OVER\nThanks for playing\nRestarting at level 1.....");
+        }
+    }
+
+    /**
+     *
+     * @param intensity
+     */
+    public void setIntensity(int intensity) {
+        this.intensity.set(intensity);
+    }
+
+    /**
+     *
+     * @param remaining
+     */
+    public void setRemaining(int remaining) {
+        this.remaining.set(remaining);
+    }
+
+    /**
+     *
+     * @param by
+     */
+    public void decreaseRemaining(int by) {
+        this.remaining.set(remaining.get() - by);
+
+        if (remaining.get() <= 0) {
+            GameWindow.getInstance().newLevel(currentLevel + 1, "Level beat\nLoading the next...");
+        }
     }
 
     /**

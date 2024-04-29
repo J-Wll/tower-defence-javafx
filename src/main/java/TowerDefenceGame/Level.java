@@ -29,7 +29,7 @@ public class Level {
     private final Monster[] monsters = new Monster[50 + (50 * currentLevel)];
 //    one for testing
 //    private final Monster[] monsters = new Monster[1];
-    private final int monstersRemaining = monsters.length;
+    private int monstersRemaining = monsters.length;
 
 //    How often new monsters spawn and the counter for the logic. Starts at the same value so one spawns right away
     private int baseSpawnThreshold = 100;
@@ -37,6 +37,7 @@ public class Level {
     private int spawnCounter = spawnThreshold;
 //    Intensity value makes monsters spawn faster and makes them harder types
     private double intensityValue = 1 + currentLevel;
+    private int lastUpdateIntensity = 0;
     private final GraphicsContext gc;
     private final Textures textures;
     private final GameStatePublisher gameManager = GameStatePublisher.getInstance();
@@ -67,9 +68,17 @@ public class Level {
 
     /**
      *
+     * @param by
+     */
+    public void decreaseRemaining(int by) {
+        monstersRemaining -= by;
+        gameManager.decreaseRemaining(by);
+
+    }
+
+    /**
+     *
      * @param gc
-     * @param gc
-     * @param textures
      * @param textures
      */
     public Level(GraphicsContext gc, Textures textures) {
@@ -85,6 +94,8 @@ public class Level {
         for (int i = 0; i < monsters.length; i++) {
             monsters[i] = new Monster(this, gc);
         }
+
+        gameManager.setRemaining(monstersRemaining);
     }
 
     /**
@@ -127,8 +138,14 @@ public class Level {
      */
     public void render() {
 //        System.out.println(intensityValue + " intensity " + Math.round(intensityValue));
-        intensityValue += 0.002;
-        spawnThreshold = (int) (baseSpawnThreshold - currentLevel - Math.round(intensityValue));
+        intensityValue += 0.004;
+        int roundedIntensity = (int) Math.round(intensityValue);
+        spawnThreshold = (int) (baseSpawnThreshold - currentLevel - Math.round(intensityValue) - roundedIntensity);
+//        stop it from calling every frame
+        if (roundedIntensity != lastUpdateIntensity) {
+            gameManager.setIntensity(roundedIntensity);
+            lastUpdateIntensity = roundedIntensity;
+        }
         mobSpawner();
         gc.setFill(Color.RED);
         gc.fillRect(100, 100, 100, 100);

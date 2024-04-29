@@ -96,6 +96,9 @@ public class Values {
      */
     public static final int explode = -30;
 
+    /**
+     *
+     */
     public static final int onFire = -31;
 
 }
