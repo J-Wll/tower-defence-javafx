@@ -13,7 +13,7 @@ public class App extends Application {
 
 //    1152 = 64*18
     private final static int WIDTH = 1152, HEIGHT = 830;
-    private final static int STARTHP = 100, STARTGOLD = 500;
+    private final static int STARTHP = 100, STARTGOLD = 150;
 
     /**
      *

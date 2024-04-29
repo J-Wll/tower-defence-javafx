@@ -15,7 +15,7 @@ public class TowerShotgun implements Tower {
 
     private final TowerBase baseTower;
     private int attackRadius = 128;
-    private final double baseDamage = 5;
+    private final double baseDamage = 9;
     private final int attackCooldown = 150;
 
     /**

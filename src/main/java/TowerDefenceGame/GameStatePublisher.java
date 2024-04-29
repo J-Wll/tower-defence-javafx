@@ -105,6 +105,10 @@ public class GameStatePublisher {
         hpLb.setLayoutY(rY);
         hpLb.setLayoutX(1060);
         renderTo.getChildren().add(hpLb);
+
+        Label levelLb = new Label("Current level: ");
+        Label intensityLb = new Label("Intensity factor: ");
+        Label remainingLb = new Label("Enemies remaining: ");
     }
 
     /**

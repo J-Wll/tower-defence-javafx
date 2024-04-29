@@ -14,7 +14,8 @@ import javafx.scene.paint.Color;
 public class Monster implements GameSubscriber {
 
     private double x, y, width, height, health;
-    private int rewardVal;
+    private int rewardVal = 10;
+    private int hpLoss = 1;
     private int monID = -10;
     private Level level;
     private Tile[][] tileGrid;
@@ -69,22 +70,25 @@ public class Monster implements GameSubscriber {
 
                 switch (monID) {
                     case Values.monster1:
-                        rewardVal = 3;
+                        rewardVal = 5;
                         health = 10;
                         break;
                     case Values.monster2:
-                        rewardVal = 5;
-                        health = 10;
-                        moveSpeed = 4;
+                        rewardVal = 10;
+                        health = 20;
+                        moveSpeed = 2.5;
                         break;
                     case Values.monster3:
-                        rewardVal = 6;
-                        health = 20;
+                        rewardVal = 15;
+                        health = 40;
+                        moveSpeed = 0.8;
+                        hpLoss = 3;
                         break;
                     case Values.monster4:
-                        rewardVal = 10;
+                        rewardVal = 100;
                         health = 300;
                         moveSpeed = 0.5;
+                        hpLoss = 10;
                         break;
                 }
             }
@@ -113,7 +117,7 @@ public class Monster implements GameSubscriber {
         try {
             if (tileGrid[yCord][xCord].getAirID() == Values.end) {
                 alive = false;
-                gameManager.decreaseHp(1);
+                gameManager.decreaseHp(hpLoss);
                 gameManager.unsubscribe(this);
                 render();
             }

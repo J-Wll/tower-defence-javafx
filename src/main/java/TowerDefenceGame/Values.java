@@ -18,7 +18,7 @@ public class Values {
     /**
      *
      */
-    public static final Boolean DEBUG_MODE = true;
+    public static final Boolean DEBUG_MODE = false;
 
     /**
      *

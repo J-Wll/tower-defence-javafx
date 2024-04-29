@@ -12,11 +12,11 @@ public class TowerBehemoth implements Tower {
 
     private int x, y;
     private final int maximumTargets = 5;
-    private final double baseDamage = 0.04;
+    private final double baseDamage = 0.06;
     private final int attackCooldown = 1;
 
     private final TowerBase baseTower;
-    private int attackRadius = 192;
+    private int attackRadius = 250;
 
     /**
      *

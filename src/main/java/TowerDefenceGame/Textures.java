@@ -24,11 +24,15 @@ public class Textures {
 
         dict.put(Values.start, new Image("/startFlagAir.png"));
         dict.put(Values.end, new Image("/endFlagAir.png"));
-        dict.put(Values.monster1, new Image("/monsterTexture1.png"));
         dict.put(Values.laserTower, new Image("/laserTower.png"));
         dict.put(Values.flameTower, new Image("/flameTower.png"));
         dict.put(Values.behemothTower, new Image("/behemothTower.png"));
         dict.put(Values.shotgunLaserTower, new Image("/shotgunLaserTower.png"));
+
+        dict.put(Values.monster1, new Image("/monsterTexture1.png"));
+        dict.put(Values.monster2, new Image("/monsterTexture2.png"));
+        dict.put(Values.monster3, new Image("/monsterTexture3.png"));
+        dict.put(Values.monster4, new Image("/monsterTexture4.png"));
 
         dict.put(Values.explode, new Image("/explode.png"));
         dict.put(Values.onFire, new Image("/onFire.png"));

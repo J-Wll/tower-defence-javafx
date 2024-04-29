@@ -72,10 +72,10 @@ public class Shop {
         var tbutton1 = new ShopButton("Flame Tower\nCost 50 gold", buttonXStart + spacing, buttonYStart, 50, "TowerFlame");
         renderTo.getChildren().add(tbutton1);
 
-        var tbutton2 = new ShopButton("Behemoth Tower\nCost 100 gold", buttonXStart + spacing * 2, buttonYStart, 100, "TowerBehemoth");
+        var tbutton2 = new ShopButton("Shotgun Laser Tower\nCost 50 gold", buttonXStart + spacing * 2, buttonYStart, 50, "TowerShotgun");
         renderTo.getChildren().add(tbutton2);
 
-        var tbutton3 = new ShopButton("Shotgun Laser Tower\nCost 100 gold", buttonXStart + spacing * 3, buttonYStart, 100, "TowerShotgun");
+        var tbutton3 = new ShopButton("Behemoth Tower\nCost 100 gold", buttonXStart + spacing * 3, buttonYStart, 100, "TowerBehemoth");
         renderTo.getChildren().add(tbutton3);
 
         Label powersLb = new Label("Power-ups");
