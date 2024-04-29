@@ -203,6 +203,22 @@ public class GameWindow extends Pane {
 //            endLevelCounter = 0;
 //        }
 
+    public void update() {
+        gc.clearRect(0, 0, WIDTH, HEIGHT);
+
+//      background
+        gc.setFill(Color.LIGHTGREY);
+        gc.fillRect(0, 0, WIDTH, HEIGHT);
+
+        if (gameManager.getHp() >= 0) {
+            level.render();
+        }
+
+        if (mouseItemActive) {
+            gc.drawImage(textures.getText().get(mouseTower.getValue()), mouseX - 32, mouseY - 32);
+        }
+    }
+
     /**
      *
      */
@@ -218,25 +234,7 @@ public class GameWindow extends Pane {
         animationTimer = new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
-//                time in seconds
-                double t = (currentNanoTime - startNanoTime) / 1000000000.0;
-//                System.out.println(t);
-
-                gc.clearRect(0, 0, WIDTH, HEIGHT);
-
-//                background
-                gc.setFill(Color.LIGHTGREY);
-                gc.fillRect(0, 0, WIDTH, HEIGHT);
-
-                if (gameManager.getHp() <= 0) {
-                    newLevel(1, "GAME OVER\nThanks for playing\nRestarting at level 1.....");
-                } else {
-                    level.render();
-                }
-
-                if (mouseItemActive) {
-                    gc.drawImage(textures.getText().get(mouseTower.getValue()), mouseX - 32, mouseY - 32);
-                }
+                update();
             }
         };
         animationTimer.start();
