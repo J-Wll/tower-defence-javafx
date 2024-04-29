@@ -22,6 +22,7 @@ public class Monster implements GameSubscriber {
     private Boolean alreadySpawned = false;
     private Boolean alive = false;
 
+//    move speed has issues if it doesn't go into 64 that cleanly
 //    speed of movement, counter for movements, amount of moves that trigger direction check, direction states, current direction
     private double moveSpeed = 1;
     private double walkCounter = 0;
@@ -75,8 +76,9 @@ public class Monster implements GameSubscriber {
                         break;
                     case Values.monster2:
                         rewardVal = 10;
-                        health = 20;
+                        health = 15;
                         moveSpeed = 2.5;
+                        hpLoss = 2;
                         break;
                     case Values.monster3:
                         rewardVal = 15;
@@ -144,7 +146,7 @@ public class Monster implements GameSubscriber {
                 return;
             }
         } catch (Exception e) {
-            System.out.println("Down" + e);
+//            System.out.println("Down" + e);
         }
         try {
             if (direction != down && tileGrid[yCord - 1][xCord].getGroundID() == Values.path) {
@@ -152,7 +154,7 @@ public class Monster implements GameSubscriber {
                 return;
             }
         } catch (Exception e) {
-            System.out.println("Up" + e);
+//            System.out.println("Up" + e);
         }
         try {
             if (direction != left && tileGrid[yCord][xCord + 1].getGroundID() == Values.path) {
@@ -160,7 +162,7 @@ public class Monster implements GameSubscriber {
                 return;
             }
         } catch (Exception e) {
-            System.out.println("Right" + e);
+//            System.out.println("Right" + e);
         }
         try {
             if (direction != right && tileGrid[yCord][xCord - 1].getGroundID() == Values.path) {
@@ -168,7 +170,7 @@ public class Monster implements GameSubscriber {
                 return;
             }
         } catch (Exception e) {
-            System.out.println("Left" + e);
+//            System.out.println("Left" + e);
         }
     }
 

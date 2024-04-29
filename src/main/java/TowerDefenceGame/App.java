@@ -53,7 +53,8 @@ public class App extends Application {
      */
     public void setLevel(int to, String text) {
         if (to > LEVELCOUNT) {
-            setLevel(1, "All levels completed\nWell done\nRestarting.....");
+            to = 1;
+            text = "All levels completed\nWell done\nRestarting.....";
         }
 
         currentLevel = to;

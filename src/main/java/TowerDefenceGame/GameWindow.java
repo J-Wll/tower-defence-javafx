@@ -120,8 +120,8 @@ public class GameWindow extends Pane {
                     Tile[][] tilegrid = level.getTileGrid();
                     Tile clickedTile = tilegrid[(int) (mouseY / 64)][(int) (mouseX / 64)];
                     if (clickedTile.getGroundID() != Values.path && clickedTile.getAirID() == Values.empty) {
-                        System.out.println(clickedTile.getGroundID());
-                        System.out.println(clickedTile.getAirID());
+//                        System.out.println(clickedTile.getGroundID());
+//                        System.out.println(clickedTile.getAirID());
                         clickedTile.setTower(mouseTower);
                         mouseTower.setPos(clickedTile.getX(), clickedTile.getY());
                         mouseItemActive = false;
@@ -134,7 +134,7 @@ public class GameWindow extends Pane {
 
         canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
         gc = canvas.getGraphicsContext2D();
-        level = new Level(gc, textures);
+        level = new Level(gc, textures, currentLevel);
         this.endLevelCounter = 0;
 
 //        (calling get children of the pane)
@@ -185,27 +185,9 @@ public class GameWindow extends Pane {
      * @param text
      */
     public void newLevel(int level, String text) {
-//
-//        if (!endLevelShown) {
-//            root.getChildren().clear();
-//            var label = new Label(text);
-//            label.setStyle("-fx-text-fill: white");
-//            label.setLayoutX(50);
-//            label.setLayoutY(50);
-//            root.getChildren().add(endLevelCanvas);
-//            endLevelShown = true;
-//            root.getChildren().add(label);
-//
-//        }
-
-//        endLevelCounter += 1;
-//        System.out.println(endLevelCounter);
-//        if (endLevelCounter > 150) {
         app.setLevel(level, text);
 
     }
-//            endLevelCounter = 0;
-//        }
 
     public void update() {
         gc.clearRect(0, 0, WIDTH, HEIGHT);

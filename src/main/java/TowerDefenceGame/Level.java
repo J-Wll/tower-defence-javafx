@@ -24,12 +24,12 @@ public class Level {
     private final int tileSize = 64;
 //    Stores all the tiles
     private Tile[][] tileGrid = new Tile[levelHeight][levelWidth];
-    private final int currentLevel = 1;
+    private int currentLevel;
 //    Array of monsters
-    private final Monster[] monsters = new Monster[50 + (50 * currentLevel)];
+    private final Monster[] monsters;
 //    one for testing
 //    private final Monster[] monsters = new Monster[1];
-    private int monstersRemaining = monsters.length;
+    private int monstersRemaining;
 
 //    How often new monsters spawn and the counter for the logic. Starts at the same value so one spawns right away
     private int baseSpawnThreshold = 100;
@@ -81,9 +81,12 @@ public class Level {
      * @param gc
      * @param textures
      */
-    public Level(GraphicsContext gc, Textures textures) {
+    public Level(GraphicsContext gc, Textures textures, int currentLevel) {
         this.gc = gc;
         this.textures = textures;
+        this.currentLevel = currentLevel;
+        monsters = new Monster[50 + (50 * currentLevel)];
+        monstersRemaining = monsters.length;
 
         for (int yTile = 0; yTile < tileGrid.length; yTile++) {
             for (int xTile = 0; xTile < tileGrid[0].length; xTile++) {

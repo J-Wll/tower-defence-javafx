@@ -14,7 +14,7 @@ public class TowerLaser implements Tower {
     private final int maximumTargets = 1;
 
     private final TowerBase baseTower;
-    private int attackRadius = 160;
+    private int attackRadius = 200;
     private final double baseDamage = 0.04;
     private final int attackCooldown = 1;
 
