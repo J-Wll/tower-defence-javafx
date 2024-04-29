@@ -19,11 +19,17 @@ public class GameStatePublisher {
     private ArrayList<GameSubscriber> subscribers;
     private IntegerProperty hp;
     private IntegerProperty gold;
+    private IntegerProperty intensity;
+    private IntegerProperty remaining;
+    private final int currentLevel;
 
-    private GameStatePublisher(int hp, int gold) {
+    private GameStatePublisher(int hp, int gold, int currentLevel) {
         this.hp = new SimpleIntegerProperty(hp);
         this.gold = new SimpleIntegerProperty(gold);
+        this.intensity = new SimpleIntegerProperty(0);
+        this.remaining = new SimpleIntegerProperty(0);
         this.subscribers = new ArrayList();
+        this.currentLevel = currentLevel;
     }
 
     /**
@@ -33,9 +39,9 @@ public class GameStatePublisher {
      * @return
      */
 //    Version intended for creating it
-    public static GameStatePublisher getInstance(int hp, int gold) {
+    public static GameStatePublisher getInstance(int hp, int gold, int currentLevel) {
         if (instance == null) {
-            instance = new GameStatePublisher(hp, gold);
+            instance = new GameStatePublisher(hp, gold, currentLevel);
         }
         return instance;
     }
@@ -88,29 +94,22 @@ public class GameStatePublisher {
      */
     public void render(Group renderTo) {
         int rY = 645;
-        Label goldLb = new Label();
+
         StringBinding goldTextBinding = Bindings.createStringBinding(
                 () -> "Gold: " + gold.get(),
                 gold
         );
-        goldLb.textProperty().bind(goldTextBinding);
-        goldLb.getStyleClass().add("gold-lb");
-        goldLb.setLayoutY(rY);
-        goldLb.setLayoutX(25);
+        Label goldLb = new AutoLabel(goldTextBinding, "gold-lb", 25, rY);
         renderTo.getChildren().add(goldLb);
 
-        Label hpLb = new Label();
         StringBinding hpTextBinding = Bindings.createStringBinding(
                 () -> "HP: " + hp.get(),
                 hp
         );
-        hpLb.textProperty().bind(hpTextBinding);
-        hpLb.getStyleClass().add("hp-lb");
-        hpLb.setLayoutY(rY);
-        hpLb.setLayoutX(1060);
+        Label hpLb = new AutoLabel(hpTextBinding, "hp-lb", 1060, rY);
         renderTo.getChildren().add(hpLb);
 
-        Label levelLb = new Label("Current level: ");
+        Label levelLb = new Label("Current level: " + this.currentLevel);
         Label intensityLb = new Label("Intensity factor: ");
         Label remainingLb = new Label("Enemies remaining: ");
     }
@@ -182,4 +181,15 @@ public class GameStatePublisher {
         setGold(gold.get() + increase);
     }
 
+//    Auto updates with binding
+    private class AutoLabel extends Label {
+
+        public AutoLabel(StringBinding strBi, String styleClass, int x, int y) {
+            super();
+            setLayoutX(x);
+            setLayoutY(y);
+            getStyleClass().add(styleClass);
+            textProperty().bind(strBi);
+        }
+    }
 }

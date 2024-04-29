@@ -95,7 +95,7 @@ public class GameWindow extends Pane {
 
 //        Manages health and gold values, sends events relating to them
 //        these two are rendered at the bottom of start so they are on top of canvas
-        this.gameManager = GameStatePublisher.getInstance(STARTHP, STARTGOLD);
+        this.gameManager = GameStatePublisher.getInstance(STARTHP, STARTGOLD, currentLevel);
         this.shop = new Shop(this, gameManager);
 
         handler = new EventHandler<MouseEvent>() {
@@ -188,7 +188,7 @@ public class GameWindow extends Pane {
         gameOverGc.fillRect(0, 0, WIDTH, HEIGHT);
 
         gameOverCounter += 1;
-        System.out.println(gameOverCounter);
+//        System.out.println(gameOverCounter);
         if (gameOverCounter > 150) {
             app.setLevel(1);
             gameOverCounter = 0;
