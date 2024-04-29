@@ -30,8 +30,9 @@ public class GameWindow extends Pane {
     private Boolean mouseItemActive = false;
     private Tower mouseTower;
     private double mouseX, mouseY;
-    private final GameStatePublisher gameManager = GameStatePublisher.getInstance();
-    private Group root;
+    private GameStatePublisher gameManager = null;
+    private Shop shop = null;
+    private final Group root;
 
     private static GameWindow instance;
 
@@ -42,15 +43,14 @@ public class GameWindow extends Pane {
      * @param root
      * @return
      */
-    public static GameWindow getInstance(int x, int y, Group root) {
+    public static GameWindow getInstance(int x, int y, Group root, int STARTHP, int STARTGOLD) {
         if (instance == null) {
-            instance = new GameWindow(x, y, root);
+            instance = new GameWindow(x, y, root, STARTHP, STARTGOLD);
         }
         return instance;
     }
 
 //    Version for acessing without args
-
     /**
      *
      * @return
@@ -64,7 +64,7 @@ public class GameWindow extends Pane {
      * @param x
      * @param y
      */
-    private GameWindow(int x, int y, Group root) {
+    private GameWindow(int x, int y, Group root, int STARTHP, int STARTGOLD) {
         WIDTH = x;
         HEIGHT = y;
         canvas = new Canvas(WIDTH, HEIGHT);
@@ -72,6 +72,11 @@ public class GameWindow extends Pane {
         gameOverGc = gameOverCanvas.getGraphicsContext2D();
 
         this.root = root;
+
+//        Manages health and gold values, sends events relating to them
+//        these two are rendered at the bottom of start so they are on top of canvas
+        this.gameManager = GameStatePublisher.getInstance(STARTHP, STARTGOLD);
+        this.shop = new Shop(this, gameManager);
 
         EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
             @Override
@@ -105,8 +110,10 @@ public class GameWindow extends Pane {
 //        (calling get children of the pane)
         getChildren()
                 .add(canvas);
+
         save.loadSave(level,
                 new File("./src/main/resources/level1.save"));
+
     }
 
     /**
@@ -194,6 +201,7 @@ public class GameWindow extends Pane {
                 }
             }
         }.start();
-
+        shop.render(root);
+        gameManager.render(root);
     }
 }

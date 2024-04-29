@@ -25,15 +25,8 @@ public class App extends Application {
 
         final var root = new Group();
 
-//        Manages health and gold values, sends events relating to them
-        final var gameManager = GameStatePublisher.getInstance(STARTHP, STARTGOLD);
-
-        final var gameWindow = GameWindow.getInstance(WIDTH, HEIGHT, root);
+        final var gameWindow = GameWindow.getInstance(WIDTH, HEIGHT, root, STARTHP, STARTGOLD);
         root.getChildren().add(gameWindow);
-
-        final var shop = new Shop(gameWindow, gameManager);
-        shop.render(root);
-        gameManager.render(root);
 
         final var scene = new Scene(root, WIDTH, HEIGHT);
 
