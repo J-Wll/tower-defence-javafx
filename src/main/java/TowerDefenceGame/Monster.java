@@ -23,7 +23,7 @@ public class Monster implements GameSubscriber {
     private Boolean alive = false;
 
 //    speed of movement, counter for movements, amount of moves that trigger direction check, direction states, current direction
-    private double moveSpeed = 1;
+    private double moveSpeed = 32;
     private double walkCounter = 0;
     private int directionCheck;
     private final int right = 0, left = 1, up = 2, down = 3;

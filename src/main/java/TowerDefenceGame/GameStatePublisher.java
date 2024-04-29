@@ -49,6 +49,10 @@ public class GameStatePublisher {
         return instance;
     }
 
+    public static void deleteInstance() {
+        instance = null;
+    }
+
     /**
      *
      * @param s

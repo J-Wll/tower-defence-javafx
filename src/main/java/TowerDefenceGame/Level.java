@@ -126,7 +126,7 @@ public class Level {
      *
      */
     public void render() {
-        System.out.println(intensityValue + " intensity " + Math.round(intensityValue));
+//        System.out.println(intensityValue + " intensity " + Math.round(intensityValue));
         intensityValue += 0.002;
         spawnThreshold = (int) (baseSpawnThreshold - currentLevel - Math.round(intensityValue));
         mobSpawner();

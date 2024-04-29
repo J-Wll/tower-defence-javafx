@@ -20,6 +20,7 @@ public class GameWindow extends Pane {
 
     private static int WIDTH, HEIGHT;
     private final Level level;
+    private int currentLevel = 1;
     private final Save save = new Save();
     private final Canvas canvas;
     private final GraphicsContext gc;
@@ -33,8 +34,13 @@ public class GameWindow extends Pane {
     private GameStatePublisher gameManager = null;
     private Shop shop = null;
     private final Group root;
+    private App app;
 
-    private static GameWindow instance;
+    private AnimationTimer animationTimer;
+    EventHandler<MouseEvent> handler;
+    private int gameOverCounter = 0;
+
+    private static GameWindow instance = null;
 
     /**
      *
@@ -43,9 +49,9 @@ public class GameWindow extends Pane {
      * @param root
      * @return
      */
-    public static GameWindow getInstance(int x, int y, Group root, int STARTHP, int STARTGOLD) {
+    public static GameWindow getInstance(int x, int y, Group root, int STARTHP, int STARTGOLD, App app, int currentLevel) {
         if (instance == null) {
-            instance = new GameWindow(x, y, root, STARTHP, STARTGOLD);
+            instance = new GameWindow(x, y, root, STARTHP, STARTGOLD, app, currentLevel);
         }
         return instance;
     }
@@ -59,17 +65,31 @@ public class GameWindow extends Pane {
         return instance;
     }
 
+    public static void deleteInstance() {
+        instance = null;
+        GameStatePublisher.deleteInstance();
+    }
+
+    public void clean() {
+        animationTimer.stop();
+        handler = null;
+    }
+
     /**
      *
      * @param x
      * @param y
      */
-    private GameWindow(int x, int y, Group root, int STARTHP, int STARTGOLD) {
+    private GameWindow(int x, int y, Group root, int STARTHP, int STARTGOLD, App app, int currentLevel) {
         WIDTH = x;
         HEIGHT = y;
         canvas = new Canvas(WIDTH, HEIGHT);
+
         gameOverCanvas = new Canvas(WIDTH, HEIGHT);
         gameOverGc = gameOverCanvas.getGraphicsContext2D();
+
+        this.currentLevel = currentLevel;
+        this.app = app;
 
         this.root = root;
 
@@ -78,7 +98,7 @@ public class GameWindow extends Pane {
         this.gameManager = GameStatePublisher.getInstance(STARTHP, STARTGOLD);
         this.shop = new Shop(this, gameManager);
 
-        EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+        handler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
 //                System.out.println("Handling event " + event.getEventType());
@@ -106,13 +126,14 @@ public class GameWindow extends Pane {
         canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
         gc = canvas.getGraphicsContext2D();
         level = new Level(gc, textures);
+        this.gameOverCounter = 0;
 
 //        (calling get children of the pane)
         getChildren()
                 .add(canvas);
 
         save.loadSave(level,
-                new File("./src/main/resources/level1.save"));
+                new File("./src/main/resources/level" + currentLevel + ".save"));
 
     }
 
@@ -152,17 +173,26 @@ public class GameWindow extends Pane {
 
     private void showGameOver() {
         if (!gameOverShown) {
-            var label = new Label("GAME OVER\nThanks for playing");
+            root.getChildren().clear();
+            var label = new Label("GAME OVER\nThanks for playing\nRestarting at level 1.....");
             label.setStyle("-fx-text-fill: white");
             label.setLayoutX(50);
             label.setLayoutY(50);
             root.getChildren().add(gameOverCanvas);
             gameOverShown = true;
             root.getChildren().add(label);
+
         }
         gameOverGc.clearRect(0, 0, WIDTH, HEIGHT);
         gc.setFill(Color.WHITE);
         gameOverGc.fillRect(0, 0, WIDTH, HEIGHT);
+
+        gameOverCounter += 1;
+        System.out.println(gameOverCounter);
+        if (gameOverCounter > 150) {
+            app.setLevel(1);
+            gameOverCounter = 0;
+        }
     }
 
     /**
@@ -177,7 +207,7 @@ public class GameWindow extends Pane {
 //        }
 
 //        game loop
-        new AnimationTimer() {
+        animationTimer = new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
 //                time in seconds
@@ -200,7 +230,8 @@ public class GameWindow extends Pane {
                     gc.drawImage(textures.getText().get(mouseTower.getValue()), mouseX - 32, mouseY - 32);
                 }
             }
-        }.start();
+        };
+        animationTimer.start();
         shop.render(root);
         gameManager.render(root);
     }
