@@ -71,17 +71,17 @@ public class Monster implements GameSubscriber {
 
                 switch (monID) {
                     case Values.monster1:
-                        rewardVal = 5;
+                        rewardVal = 3;
                         health = 10;
                         break;
                     case Values.monster2:
-                        rewardVal = 10;
+                        rewardVal = 6;
                         health = 15;
                         moveSpeed = 2.5;
                         hpLoss = 2;
                         break;
                     case Values.monster3:
-                        rewardVal = 15;
+                        rewardVal = 10;
                         health = 40;
                         moveSpeed = 0.8;
                         hpLoss = 3;

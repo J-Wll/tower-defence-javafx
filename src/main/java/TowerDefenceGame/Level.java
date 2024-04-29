@@ -32,7 +32,7 @@ public class Level {
     private int monstersRemaining;
 
 //    How often new monsters spawn and the counter for the logic. Starts at the same value so one spawns right away
-    private int baseSpawnThreshold = 100;
+    private int baseSpawnThreshold = 90;
     private int spawnThreshold = baseSpawnThreshold - currentLevel;
     private int spawnCounter = spawnThreshold;
 //    Intensity value makes monsters spawn faster and makes them harder types
@@ -80,6 +80,7 @@ public class Level {
      *
      * @param gc
      * @param textures
+     * @param currentLevel
      */
     public Level(GraphicsContext gc, Textures textures, int currentLevel) {
         this.gc = gc;
@@ -117,13 +118,20 @@ public class Level {
                         toSpawn = Values.monster4;
                     } else {
 //                        Random system so sometimes fast/tough enemies are spawned
+//                        Starts at a low chance for hard enemies but scales pretty quick with intensity
                         Random rand = new Random();
                         int randomMon = rand.nextInt(100 - 1 + 1) + 1;
-                        if (randomMon >= 0 && randomMon <= 5 + Math.round(intensityValue)) {
+//                        1% chance for boss mob pass 75
+                        if (intensityValue > 68) {
+                            if (randomMon == 1) {
+                                toSpawn = Values.monster4;
+                            }
+                        } else if (randomMon >= 1 && randomMon <= 2 + Math.round(intensityValue)) {
                             toSpawn = Values.monster2;
-                        } else if (randomMon >= 60 && randomMon <= 65 + Math.round(intensityValue)) {
+                        } else if (randomMon >= 60 && randomMon <= 61 + Math.round(intensityValue)) {
                             toSpawn = Values.monster3;
                         }
+
                     }
                     mon.spawn(toSpawn);
 
@@ -141,9 +149,12 @@ public class Level {
      */
     public void render() {
 //        System.out.println(intensityValue + " intensity " + Math.round(intensityValue));
-        intensityValue += 0.004;
+        intensityValue += 0.008 + (currentLevel / 1000);
         int roundedIntensity = (int) Math.round(intensityValue);
-        spawnThreshold = (int) (baseSpawnThreshold - currentLevel - Math.round(intensityValue) - roundedIntensity);
+
+        if (spawnThreshold >= 3) {
+            spawnThreshold = (int) (baseSpawnThreshold - currentLevel - roundedIntensity);
+        }
 //        stop it from calling every frame
         if (roundedIntensity != lastUpdateIntensity) {
             gameManager.setIntensity(roundedIntensity);

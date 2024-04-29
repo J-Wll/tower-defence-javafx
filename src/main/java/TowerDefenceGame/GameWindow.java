@@ -189,6 +189,9 @@ public class GameWindow extends Pane {
 
     }
 
+    /**
+     *
+     */
     public void update() {
         gc.clearRect(0, 0, WIDTH, HEIGHT);
 

@@ -34,7 +34,7 @@ public class TowerBase implements GameSubscriber {
     /**
      *
      * @param baseDamage
-     * @param attackSpeed
+     * @param attackCooldown
      * @param attackRadius
      * @param maximumTargets
      */

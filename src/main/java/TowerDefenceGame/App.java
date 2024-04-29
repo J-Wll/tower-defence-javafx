@@ -19,10 +19,10 @@ import javafx.util.Duration;
  */
 public class App extends Application {
 
-    private final static int LEVELCOUNT = 3;
+    private final static int LEVELCOUNT = 5;
 //    1152 = 64*18
     private final static int WIDTH = 1152, HEIGHT = 830;
-    private final static int STARTHP = 100, STARTGOLD = 150;
+    private final static int STARTHP = 100, STARTGOLD = 200;
     private int currentLevel = 1;
     final Group root = new Group();
     final Scene scene = new Scene(root, WIDTH, HEIGHT);
@@ -54,7 +54,7 @@ public class App extends Application {
     public void setLevel(int to, String text) {
         if (to > LEVELCOUNT) {
             to = 1;
-            text = "All levels completed\nWell done\nRestarting.....";
+            text = "All levels complete\nWell done\nRestarting.....";
         }
 
         currentLevel = to;
