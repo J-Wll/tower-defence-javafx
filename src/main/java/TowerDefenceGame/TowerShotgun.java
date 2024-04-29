@@ -16,31 +16,55 @@ public class TowerShotgun implements Tower {
     private final TowerBase baseTower;
     private int attackRadius = 128;
     private final double baseDamage = 5;
-    private final double attackSpeed = 0.1;
+    private final int attackCooldown = 150;
 
+    /**
+     *
+     */
     public TowerShotgun() {
-        this.baseTower = new TowerBase(baseDamage, attackSpeed, attackRadius, maximumTargets);
-
+        this.baseTower = new TowerBase(baseDamage, attackCooldown, attackRadius, maximumTargets);
+        baseTower.setAttackWidth(12);
     }
 
+    /**
+     *
+     * @param monsters
+     */
     @Override
     public void attack(Monster[] monsters) {
         baseTower.attack(monsters);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getValue() {
         return Values.shotgunLaserTower;
     }
 
+    /**
+     *
+     * @param event
+     */
     public void update(String event) {
         baseTower.update(event);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getAttackRadius() {
         return attackRadius;
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public void setPos(int x, int y) {
 //        this.x = x;
 //        this.y = y;

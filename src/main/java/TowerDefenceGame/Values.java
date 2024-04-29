@@ -15,7 +15,6 @@ package TowerDefenceGame;
 public class Values {
 
 //    Toggle between 0 and 1 for debug
-
     /**
      *
      */
@@ -27,7 +26,6 @@ public class Values {
     public static final int tileSize = 64;
 
 //    For logic and accessing textures
-
     /**
      *
      */
@@ -97,6 +95,8 @@ public class Values {
      *
      */
     public static final int explode = -30;
+
+    public static final int onFire = -31;
 
 }
 

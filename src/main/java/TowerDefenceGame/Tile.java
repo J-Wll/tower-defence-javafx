@@ -112,6 +112,7 @@ public class Tile {
             gc.drawImage(Textures.getText().get(airID), x, y, width, height);
             if (Values.DEBUG_MODE && tower != null) {
                 int attackRadius = tower.getAttackRadius();
+                gc.setLineWidth(1);
                 gc.setStroke(Color.BLACK);
                 gc.strokeRect(x - attackRadius / 2, y - attackRadius / 2, width + attackRadius, height + attackRadius);
             }

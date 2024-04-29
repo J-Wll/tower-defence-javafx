@@ -28,6 +28,9 @@ public class Monster implements GameSubscriber {
     private final int right = 0, left = 1, up = 2, down = 3;
     private int direction = right;
 
+//    For flametower, time in frames (60 per s)
+    private int burnTime = 0;
+
 //    location relative to the tile grid
     private int xCord = 0;
     private int yCord = 0;
@@ -35,6 +38,11 @@ public class Monster implements GameSubscriber {
     private final GraphicsContext gc;
     private final GameStatePublisher gameManager = GameStatePublisher.getInstance();
 
+    /**
+     *
+     * @param level
+     * @param gc
+     */
     public Monster(Level level, GraphicsContext gc) {
 
         this.level = level;
@@ -45,6 +53,7 @@ public class Monster implements GameSubscriber {
 
     /**
      *
+     * @param monID
      */
     public void spawn(int monID) {
         for (int yTile = 0; yTile < tileGrid.length; yTile++) {
@@ -74,7 +83,7 @@ public class Monster implements GameSubscriber {
                         break;
                     case Values.monster4:
                         rewardVal = 10;
-                        health = 60;
+                        health = 300;
                         moveSpeed = 0.5;
                         break;
                 }
@@ -103,7 +112,6 @@ public class Monster implements GameSubscriber {
         //        If it's at the end of the track
         try {
             if (tileGrid[yCord][xCord].getAirID() == Values.end) {
-//                System.out.println("end                   " + this);
                 alive = false;
                 gameManager.decreaseHp(1);
                 gameManager.unsubscribe(this);
@@ -159,6 +167,9 @@ public class Monster implements GameSubscriber {
         }
     }
 
+    /**
+     *
+     */
     public void move() {
 
 //        runs whenever run counter >= tilesize (64)
@@ -189,9 +200,18 @@ public class Monster implements GameSubscriber {
         }
     }
 
+    /**
+     *
+     */
     public void render() {
-//            System.out.println(this);
         gc.drawImage(Textures.getText().get(monID), x, y, width, height);
+
+        if (burnTime > 0 && alive) {
+            gc.drawImage(Textures.getText().get(Values.onFire), x + 37, y, 25, 25);
+            burnTime -= 1;
+            takeDamage(0.01);
+        }
+
         if (!alive) {
             gc.drawImage(Textures.getText().get(Values.explode), x, y, width, height);
         }
@@ -200,6 +220,10 @@ public class Monster implements GameSubscriber {
 //    public void explode() {
 ////            System.out.println(this);
 //    }
+    /**
+     *
+     * @param event
+     */
     @Override
     public void update(String event) {
         if ("lowHP".equals(event)) {
@@ -210,22 +234,42 @@ public class Monster implements GameSubscriber {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Boolean getAlive() {
         return alive;
     }
 
+    /**
+     *
+     * @return
+     */
     public Boolean getAlreadySpawned() {
         return alreadySpawned;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getY() {
         return y;
     }
 
+    /**
+     *
+     * @param health
+     */
     public void setHealth(double health) {
         this.health = health;
         if (health <= 0) {
@@ -235,8 +279,15 @@ public class Monster implements GameSubscriber {
         }
     }
 
+    /**
+     *
+     * @param damage
+     */
     public void takeDamage(double damage) {
         setHealth(health - damage);
     }
 
+    public void increaseBurnTime(int time) {
+        this.burnTime += time;
+    }
 }

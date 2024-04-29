@@ -21,12 +21,20 @@ public class Shop {
     private final Textures textures;
     private int spawning;
 
+    /**
+     *
+     * @param gameWindow
+     * @param gameManager
+     */
     public Shop(GameWindow gameWindow, GameStatePublisher gameManager) {
         this.gameWindow = gameWindow;
         this.gameManager = gameManager;
         this.textures = gameWindow.getTextures();
     }
 
+    /**
+     *
+     */
     public void towerRefund() {
         switch (spawning) {
             case Values.laserTower:
@@ -44,6 +52,10 @@ public class Shop {
         }
     }
 
+    /**
+     *
+     * @param renderTo
+     */
     public void render(Group renderTo) {
 //        could make this render from an array of buttons but it would take longer to write and there's only going to be 10 buttons absolute max
         int buttonYStart = 710;
