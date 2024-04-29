@@ -149,7 +149,7 @@ public class Level {
      */
     public void render() {
 //        System.out.println(intensityValue + " intensity " + Math.round(intensityValue));
-        intensityValue += 0.008 + (currentLevel / 1000);
+        intensityValue += 0.008 + ((currentLevel * 1.45) / 1000);
         int roundedIntensity = (int) Math.round(intensityValue);
 
         if (spawnThreshold >= 3) {
