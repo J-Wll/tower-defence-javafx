@@ -11,12 +11,15 @@ package TowerDefenceGame;
 public class TowerFlame implements Tower {
 
     private int x, y;
-
-    private final Tower baseTower;
+    private final int maximumTargets = 1;
+    private final double baseDamage = 0.04;
+    private final double attackSpeed = 1;
     private int attackRadius = 128;
 
-    public TowerFlame(Tower baseTower) {
-        this.baseTower = baseTower;
+    private final TowerBase baseTower;
+
+    public TowerFlame() {
+        this.baseTower = new TowerBase(baseDamage, attackSpeed, attackRadius, maximumTargets);
     }
 
     @Override

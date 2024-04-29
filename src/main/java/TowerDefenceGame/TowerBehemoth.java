@@ -11,12 +11,15 @@ package TowerDefenceGame;
 public class TowerBehemoth implements Tower {
 
     private int x, y;
+    private final int maximumTargets = 5;
+    private final double baseDamage = 0.04;
+    private final double attackSpeed = 5;
 
-    private final Tower baseTower;
+    private final TowerBase baseTower;
     private int attackRadius = 192;
 
-    public TowerBehemoth(Tower baseTower) {
-        this.baseTower = baseTower;
+    public TowerBehemoth() {
+        this.baseTower = new TowerBase(baseDamage, attackSpeed, attackRadius, maximumTargets);
     }
 
     @Override

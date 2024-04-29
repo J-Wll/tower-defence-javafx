@@ -28,7 +28,6 @@ public class GameStatePublisher {
 
     /**
      *
-     * @param subs
      * @param hp
      * @param gold
      * @return
@@ -42,6 +41,11 @@ public class GameStatePublisher {
     }
 
 //    Version for acessing without args
+
+    /**
+     *
+     * @return
+     */
     public static GameStatePublisher getInstance() {
         return instance;
     }
@@ -75,6 +79,10 @@ public class GameStatePublisher {
         }
     }
 
+    /**
+     *
+     * @param renderTo
+     */
     public void render(Group renderTo) {
         int rY = 645;
         Label goldLb = new Label();
@@ -117,11 +125,19 @@ public class GameStatePublisher {
 
     }
 
+    /**
+     *
+     * @param damage
+     */
     public void decreaseHp(int damage) {
 //        calls sethp in case want to validate in there
         setHp(hp.get() - damage);
     }
 
+    /**
+     *
+     * @param increase
+     */
     public void increaseHp(int increase) {
         setHp(hp.get() + increase);
     }
@@ -142,10 +158,18 @@ public class GameStatePublisher {
         this.gold.set(gold);
     }
 
+    /**
+     *
+     * @param decrease
+     */
     public void decreaseGold(int decrease) {
         setGold(gold.get() - decrease);
     }
 
+    /**
+     *
+     * @param increase
+     */
     public void increaseGold(int increase) {
         setGold(gold.get() + increase);
     }

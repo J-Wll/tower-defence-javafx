@@ -35,6 +35,13 @@ public class GameWindow extends Pane {
 
     private static GameWindow instance;
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @param root
+     * @return
+     */
     public static GameWindow getInstance(int x, int y, Group root) {
         if (instance == null) {
             instance = new GameWindow(x, y, root);
@@ -43,6 +50,11 @@ public class GameWindow extends Pane {
     }
 
 //    Version for acessing without args
+
+    /**
+     *
+     * @return
+     */
     public static GameWindow getInstance() {
         return instance;
     }
@@ -97,19 +109,36 @@ public class GameWindow extends Pane {
                 new File("./src/main/resources/level1.save"));
     }
 
+    /**
+     *
+     * @param mouseItem
+     * @param mouseTower
+     */
     public void setMouseItem(Boolean mouseItem, Tower mouseTower) {
         this.mouseItemActive = mouseItem;
         this.mouseTower = mouseTower;
     }
 
+    /**
+     *
+     * @return
+     */
     public Boolean getMouseItemActive() {
         return mouseItemActive;
     }
 
+    /**
+     *
+     * @return
+     */
     public Textures getTextures() {
         return this.textures;
     }
 
+    /**
+     *
+     * @return
+     */
     public GraphicsContext getGc() {
         return gc;
     }

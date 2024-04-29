@@ -15,21 +15,87 @@ package TowerDefenceGame;
 public class Values {
 
 //    Toggle between 0 and 1 for debug
+
+    /**
+     *
+     */
     public static final Boolean DEBUG_MODE = true;
 
+    /**
+     *
+     */
     public static final int tileSize = 64;
 
 //    For logic and accessing textures
+
+    /**
+     *
+     */
     public static final int empty = 0;
+
+    /**
+     *
+     */
     public static final int grass = 1;
+
+    /**
+     *
+     */
     public static final int path = 2;
+
+    /**
+     *
+     */
     public static final int start = -1;
+
+    /**
+     *
+     */
     public static final int end = -2;
+
+    /**
+     *
+     */
     public static final int laserTower = -3;
+
+    /**
+     *
+     */
     public static final int flameTower = -4;
+
+    /**
+     *
+     */
     public static final int behemothTower = -5;
+
+    /**
+     *
+     */
     public static final int shotgunLaserTower = -6;
+
+    /**
+     *
+     */
     public static final int monster1 = -20;
+
+    /**
+     *
+     */
+    public static final int monster2 = -21;
+
+    /**
+     *
+     */
+    public static final int monster3 = -22;
+
+    /**
+     *
+     */
+    public static final int monster4 = -23;
+
+    /**
+     *
+     */
     public static final int explode = -30;
 
 }

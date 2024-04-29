@@ -29,7 +29,7 @@ public class Level {
 //    one for testing
 //    private final Monster[] monsters = new Monster[1];
 //    How often new monsters spawn and the counter for the logic. Starts at the same value so one spawns right away
-    private int spawnThreshold = 100;
+    private int spawnThreshold = 60;
     private int spawnCounter = spawnThreshold;
     private final GraphicsContext gc;
     private final Textures textures;
@@ -51,13 +51,20 @@ public class Level {
         this.tileGrid = tg;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTileSize() {
         return tileSize;
     }
 
     /**
      *
-     */
+     * @param gc
+     * @param gc
+     * @param textures
+     * @param textures */
     public Level(GraphicsContext gc, Textures textures) {
         this.gc = gc;
         this.textures = textures;
@@ -73,6 +80,9 @@ public class Level {
         }
     }
 
+    /**
+     *
+     */
     public void mobSpawner() {
         if (spawnCounter >= spawnThreshold) {
             spawnCounter = 0;
@@ -91,7 +101,6 @@ public class Level {
 
     /**
      *
-     * @param gc
      */
     public void render() {
         mobSpawner();

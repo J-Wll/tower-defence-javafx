@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 public class Monster implements GameSubscriber {
 
     private double x, y, width, height, health;
+    private int rewardVal;
     private int monID = -10;
     private Level level;
     private Tile[][] tileGrid;
@@ -57,6 +58,26 @@ public class Monster implements GameSubscriber {
                 this.alive = true;
                 this.alreadySpawned = true;
 
+                switch (monID) {
+                    case Values.monster1:
+                        rewardVal = 3;
+                        health = 10;
+                        break;
+                    case Values.monster2:
+                        rewardVal = 5;
+                        health = 10;
+                        moveSpeed = 4;
+                        break;
+                    case Values.monster3:
+                        rewardVal = 6;
+                        health = 20;
+                        break;
+                    case Values.monster4:
+                        rewardVal = 10;
+                        health = 60;
+                        moveSpeed = 0.5;
+                        break;
+                }
             }
 
         }
@@ -203,6 +224,19 @@ public class Monster implements GameSubscriber {
 
     public double getY() {
         return y;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+        if (health <= 0) {
+            alive = false;
+            gameManager.increaseGold(rewardVal);
+            render();
+        }
+    }
+
+    public void takeDamage(double damage) {
+        setHealth(health - damage);
     }
 
 }

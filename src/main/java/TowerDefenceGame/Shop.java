@@ -98,20 +98,20 @@ public class Shop {
                     Tower tower;
                     switch (towerName) {
                         case "TowerLaser":
-                            tower = new TowerLaser(new TowerBase());
+                            tower = new TowerLaser();
                             break;
                         case "TowerShotgun":
-                            tower = new TowerShotgun(new TowerBase());
+                            tower = new TowerShotgun();
                             break;
                         case "TowerBehemoth":
-                            tower = new TowerBehemoth(new TowerBase());
+                            tower = new TowerBehemoth();
                             break;
                         case "TowerFlame":
-                            tower = new TowerFlame(new TowerBase());
+                            tower = new TowerFlame();
                             break;
                         default:
                             System.out.println("towername switch default triggered");
-                            tower = new TowerLaser(new TowerBase());
+                            tower = new TowerLaser();
 
                     }
                     spawning = tower.getValue();

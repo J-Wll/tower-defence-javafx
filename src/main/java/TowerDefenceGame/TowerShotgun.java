@@ -11,12 +11,16 @@ package TowerDefenceGame;
 public class TowerShotgun implements Tower {
 
     private int x, y;
+    private final int maximumTargets = 4;
 
-    private final Tower baseTower;
+    private final TowerBase baseTower;
     private int attackRadius = 128;
+    private final double baseDamage = 5;
+    private final double attackSpeed = 0.1;
 
-    public TowerShotgun(Tower baseTower) {
-        this.baseTower = baseTower;
+    public TowerShotgun() {
+        this.baseTower = new TowerBase(baseDamage, attackSpeed, attackRadius, maximumTargets);
+
     }
 
     @Override

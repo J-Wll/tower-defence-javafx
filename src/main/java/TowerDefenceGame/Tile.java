@@ -45,27 +45,51 @@ public class Tile {
         this.groundID = groundID;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getGroundID() {
         return groundID;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getAirID() {
         return airID;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     *
+     * @param t
+     */
     public void setTower(Tower t) {
         this.tower = t;
         this.airID = t.getValue();
     }
 
+    /**
+     *
+     * @return
+     */
     public Tower getTower() {
         return tower;
     }

@@ -11,12 +11,16 @@ package TowerDefenceGame;
 public class TowerLaser implements Tower {
 
     private int x, y;
+    private final int maximumTargets = 1;
 
-    private final Tower baseTower;
+    private final TowerBase baseTower;
     private int attackRadius = 160;
+    private final double baseDamage = 0.04;
+    private final double attackSpeed = 1;
 
-    public TowerLaser(Tower baseTower) {
-        this.baseTower = baseTower;
+    public TowerLaser() {
+        this.baseTower = new TowerBase(baseDamage, attackSpeed, attackRadius, maximumTargets);
+
     }
 
     @Override
