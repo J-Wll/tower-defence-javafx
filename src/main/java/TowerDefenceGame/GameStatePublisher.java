@@ -228,7 +228,6 @@ public class GameStatePublisher {
      * @param increase
      */
     public void increaseGold(int increase) {
-//        System.out.println("increase: " + increase);
         setGold(gold.get() + increase);
     }
 

@@ -5,7 +5,6 @@
 package TowerDefenceGame;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 /**
  *
@@ -132,7 +131,6 @@ public class Monster implements GameSubscriber {
             return;
         }
 
-//        System.out.println("new tile" + " xCord: " + xCord + "  yCord: " + yCord);
         directionSwitch();
 
         walkCounter = 0;
@@ -140,13 +138,13 @@ public class Monster implements GameSubscriber {
 
     private void directionSwitch() {
 //            Changing direction logic
+//            Needs to be in try catches because the array will be out of bounds when on edge
         try {
             if (direction != up && tileGrid[yCord + 1][xCord].getGroundID() == Values.path) {
                 direction = down;
                 return;
             }
         } catch (Exception e) {
-//            System.out.println("Down" + e);
         }
         try {
             if (direction != down && tileGrid[yCord - 1][xCord].getGroundID() == Values.path) {
@@ -154,7 +152,6 @@ public class Monster implements GameSubscriber {
                 return;
             }
         } catch (Exception e) {
-//            System.out.println("Up" + e);
         }
         try {
             if (direction != left && tileGrid[yCord][xCord + 1].getGroundID() == Values.path) {
@@ -162,7 +159,6 @@ public class Monster implements GameSubscriber {
                 return;
             }
         } catch (Exception e) {
-//            System.out.println("Right" + e);
         }
         try {
             if (direction != right && tileGrid[yCord][xCord - 1].getGroundID() == Values.path) {
@@ -170,7 +166,6 @@ public class Monster implements GameSubscriber {
                 return;
             }
         } catch (Exception e) {
-//            System.out.println("Left" + e);
         }
     }
 
@@ -224,9 +219,6 @@ public class Monster implements GameSubscriber {
         }
     }
 
-//    public void explode() {
-////            System.out.println(this);
-//    }
     /**
      *
      * @param event

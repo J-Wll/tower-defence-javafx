@@ -17,17 +17,16 @@ public class Shop {
 
     private GameWindow gameWindow;
     private GameStatePublisher gameManager;
-    private final Textures textures;
+    private Textures textures;
     private int spawning;
 
     /**
      *
      * @param gameWindow
-     * @param gameManager
      */
-    public Shop(GameWindow gameWindow, GameStatePublisher gameManager) {
+    public Shop(GameWindow gameWindow) {
         this.gameWindow = gameWindow;
-        this.gameManager = gameManager;
+        this.gameManager = GameStatePublisher.getInstance();
         this.textures = gameWindow.getTextures();
     }
 
@@ -121,7 +120,7 @@ public class Shop {
                             tower = new TowerFlame();
                             break;
                         default:
-                            System.out.println("towername switch default triggered");
+                            System.err.println("towername switch default triggered");
                             tower = new TowerLaser();
 
                     }

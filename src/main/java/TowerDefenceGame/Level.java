@@ -4,9 +4,6 @@
  */
 package TowerDefenceGame;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -148,7 +145,6 @@ public class Level {
      *
      */
     public void render() {
-//        System.out.println(intensityValue + " intensity " + Math.round(intensityValue));
         intensityValue += 0.008 + ((currentLevel * 1.45) / 1000);
         int roundedIntensity = (int) Math.round(intensityValue);
 

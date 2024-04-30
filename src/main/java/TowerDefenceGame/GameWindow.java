@@ -1,17 +1,13 @@
 package TowerDefenceGame;
 
 import java.io.File;
-import java.util.HashSet;
 import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -105,23 +101,20 @@ public class GameWindow extends Pane {
 //        Manages health and gold values, sends events relating to them
 //        these two are rendered at the bottom of start so they are on top of canvas
         this.gameManager = GameStatePublisher.getInstance(STARTHP, STARTGOLD, currentLevel);
-        this.shop = new Shop(this, gameManager);
+//        Can't use singleton because not intialised yet
+        this.shop = new Shop(this);
 
         handler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-//                System.out.println("Handling event " + event.getEventType());
                 mouseX = event.getX();
                 mouseY = event.getY();
-//                System.out.println(mouseX + " : " + mouseY);
 
 //                If it's a click and in place mode
                 if ("MOUSE_CLICKED".equals(event.getEventType().toString()) && mouseItemActive && mouseY < 640) {
                     Tile[][] tilegrid = level.getTileGrid();
                     Tile clickedTile = tilegrid[(int) (mouseY / 64)][(int) (mouseX / 64)];
                     if (clickedTile.getGroundID() != Values.path && clickedTile.getAirID() == Values.empty) {
-//                        System.out.println(clickedTile.getGroundID());
-//                        System.out.println(clickedTile.getAirID());
                         clickedTile.setTower(mouseTower);
                         mouseTower.setPos(clickedTile.getX(), clickedTile.getY());
                         mouseItemActive = false;
@@ -213,11 +206,6 @@ public class GameWindow extends Pane {
      */
     public void start() {
         final long startNanoTime = System.nanoTime();
-//        testing for fiding filepaths
-//        File file = new File("./src/main/resources");
-//        for (String fileNames : file.list()) {
-//            System.out.println(fileNames);
-//        }
 
 //        game loop
         gameLoop = new Timeline(new KeyFrame(Duration.millis(1000.0 / 60), u -> update()));

@@ -96,7 +96,6 @@ public class TowerBase implements GameSubscriber {
                     double monX = mon.getX();
                     double monY = mon.getY();
 
-//                System.out.println("X: " + monX + " " + xStart + " " + xEnd + "\n" + "Y: " + monY + " " + yStart + " " + yEnd);
                     if (targetCounter < maximumTargets && monX > xStart && monX < xEnd && monY > yStart && monY < yEnd) {
 
                         gc.setStroke(attackColor);
