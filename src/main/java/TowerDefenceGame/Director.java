@@ -20,6 +20,7 @@ public class Director {
                 .withAttackColor(Color.ORANGE)
                 .withAttackWidth(8)
                 .withSpecial("flame")
+                .withCost(50)
                 .withValue(Values.flameTower);
 
     }
@@ -31,6 +32,7 @@ public class Director {
                 .withAttackRadius(250)
                 .withMaximumTargets(5)
                 .withAttackWidth(5)
+                .withCost(100)
                 .withValue(Values.behemothTower);
 
     }
@@ -41,6 +43,7 @@ public class Director {
                 .withAttackCooldown(1)
                 .withAttackRadius(200)
                 .withMaximumTargets(1)
+                .withCost(25)
                 .withValue(Values.laserTower);
     }
 
@@ -51,6 +54,7 @@ public class Director {
                 .withAttackRadius(128)
                 .withMaximumTargets(4)
                 .withAttackWidth(12)
+                .withCost(50)
                 .withValue(Values.shotgunLaserTower);
     }
 

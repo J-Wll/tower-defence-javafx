@@ -11,18 +11,11 @@ public class Tower implements GameSubscriber {
 
     private int x, y;
 
-//    constant firing laser so v low damage
-    private double baseDamage;
-    private double damage;
     //    attackcool down is in 1/60th seconds (frames)
-    private double attackCooldown;
-    private int cooldownCounter;
-    private int attackRadius;
-    private int maximumTargets;
-    private int attackWidth;
+    private double baseDamage, damage;
+    private int cooldownCounter, attackRadius, maximumTargets, attackWidth, value, cost, attackCooldown;
     private String special;
     private Color attackColour;
-    private int value;
     private GameWindow gameWindow = GameWindow.getInstance();
     private GameStatePublisher gameManager = GameStatePublisher.getInstance();
     private GraphicsContext gc = gameWindow.getGc();
@@ -34,11 +27,16 @@ public class Tower implements GameSubscriber {
     /**
      *
      * @param baseDamage
+     * @param value the value of value
+     * @param cost the value of cost
      * @param attackCooldown
      * @param attackRadius
      * @param maximumTargets
+     * @param attackWidth the value of attackWidth
+     * @param attackColour the value of attackColour
+     * @param special the value of special
      */
-    public Tower(double baseDamage, int attackCooldown, int attackRadius, int maximumTargets, Color attackColour, int attackWidth, String special, int value) {
+    public Tower(double baseDamage, int value, int cost, int attackCooldown, int attackRadius, int maximumTargets, int attackWidth, Color attackColour, String special) {
         this.baseDamage = baseDamage;
         this.damage = baseDamage;
         this.attackCooldown = attackCooldown;
@@ -47,6 +45,7 @@ public class Tower implements GameSubscriber {
         this.maximumTargets = maximumTargets;
         this.attackColour = attackColour;
         this.attackWidth = attackWidth;
+        this.cost = cost;
         this.special = special;
         this.value = value;
         gameManager.subscribe(this);
@@ -67,7 +66,9 @@ public class Tower implements GameSubscriber {
 //        Temporary attack boost
         if ("lowHP".equals(event)) {
             damage *= 1.5;
-            attackCooldown *= 1.5;
+            attackCooldown *= 0.75;
+            dmgBoostActive = true;
+            boostCounter = 0;
         }
     }
 
@@ -147,5 +148,9 @@ public class Tower implements GameSubscriber {
     public void setPos(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public int getCost() {
+        return this.cost;
     }
 }

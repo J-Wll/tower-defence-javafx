@@ -114,10 +114,18 @@ public class GameWindow extends Pane {
                 if ("MOUSE_CLICKED".equals(event.getEventType().toString()) && mouseItemActive && mouseY < 640) {
                     Tile[][] tilegrid = level.getTileGrid();
                     Tile clickedTile = tilegrid[(int) (mouseY / 64)][(int) (mouseX / 64)];
-                    if (clickedTile.getGroundID() != Values.path && clickedTile.getAirID() == Values.empty) {
+//                    If valid to place and enough gold
+                    if (clickedTile.getGroundID() != Values.path && clickedTile.getAirID() == Values.empty && gameManager.getGold() >= mouseTower.getCost()) {
                         clickedTile.setTower(mouseTower);
                         mouseTower.setPos(clickedTile.getX(), clickedTile.getY());
-                        mouseItemActive = false;
+                        gameManager.decreaseGold(mouseTower.getCost());
+//                        If not shift click or not enough gold, reset the placing, otherwise enable placing multiple
+                        if (!event.isShiftDown() || gameManager.getGold() < mouseTower.getCost()) {
+                            mouseItemActive = false;
+                        } else {
+//                            This line is needed otherwise it will place the same tower over and over again
+                            mouseTower = shop.createTower(mouseTower.getValue());
+                        }
                     }
                 }
             }

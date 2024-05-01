@@ -8,14 +8,10 @@ import javafx.scene.paint.Color;
 
 public class TowerBuilder {
 
-    private double baseDamage;
-    private int attackCooldown;
-    private int attackRadius;
-    private int maximumTargets;
+    private double baseDamage, damage;
+    private int cooldownCounter, attackRadius, maximumTargets, attackWidth, value, cost, attackCooldown;
     private Color attackColor;
-    private int attackWidth;
     private String special;
-    private int value;
 
     public TowerBuilder() {
         // Default values
@@ -27,6 +23,7 @@ public class TowerBuilder {
         this.attackWidth = 3;
         this.special = "";
         this.value = Values.laserTower;
+        this.cost = 25;
     }
 
     public TowerBuilder withBaseDamage(double baseDamage) {
@@ -69,7 +66,12 @@ public class TowerBuilder {
         return this;
     }
 
+    public TowerBuilder withCost(int cost) {
+        this.cost = cost;
+        return this;
+    }
+
     public Tower getTower() {
-        return new Tower(baseDamage, attackCooldown, attackRadius, maximumTargets, attackColor, attackWidth, special, value);
+        return new Tower(baseDamage, value, cost, attackCooldown, attackRadius, maximumTargets, attackWidth, attackColor, special);
     }
 }

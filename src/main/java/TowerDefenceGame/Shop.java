@@ -18,7 +18,7 @@ public class Shop {
     private GameWindow gameWindow;
     private GameStatePublisher gameManager;
     private Textures textures;
-    private int spawning;
+    private Tower spawning;
     private Director director = new Director();
 
     /**
@@ -29,27 +29,6 @@ public class Shop {
         this.gameWindow = gameWindow;
         this.gameManager = GameStatePublisher.getInstance();
         this.textures = gameWindow.getTextures();
-    }
-
-    /**
-     *
-     */
-    public void towerRefund() {
-        switch (spawning) {
-            case Values.laserTower:
-                gameManager.increaseGold(25);
-                break;
-            case Values.flameTower:
-                gameManager.increaseGold(50);
-                break;
-            case Values.shotgunLaserTower:
-                gameManager.increaseGold(50);
-                break;
-            case Values.behemothTower:
-                gameManager.increaseGold(100);
-                break;
-
-        }
     }
 
     /**
@@ -66,16 +45,16 @@ public class Shop {
         towersLb.setLayoutX(buttonXStart);
         renderTo.getChildren().add(towersLb);
 
-        var tbutton = new ShopButton("Laser Tower\nCost 25 gold", buttonXStart, buttonYStart, 25, "TowerLaser");
+        var tbutton = new ShopButton("Laser Tower\nCost 25 gold", buttonXStart, buttonYStart, 25, Values.laserTower);
         renderTo.getChildren().add(tbutton);
 
-        var tbutton1 = new ShopButton("Flame Tower\nCost 50 gold", buttonXStart + spacing, buttonYStart, 50, "TowerFlame");
+        var tbutton1 = new ShopButton("Flame Tower\nCost 50 gold", buttonXStart + spacing, buttonYStart, 50, Values.flameTower);
         renderTo.getChildren().add(tbutton1);
 
-        var tbutton2 = new ShopButton("Shotgun Laser Tower\nCost 50 gold", buttonXStart + spacing * 2, buttonYStart, 50, "TowerShotgun");
+        var tbutton2 = new ShopButton("Shotgun Laser Tower\nCost 50 gold", buttonXStart + spacing * 2, buttonYStart, 50, Values.shotgunLaserTower);
         renderTo.getChildren().add(tbutton2);
 
-        var tbutton3 = new ShopButton("Behemoth Tower\nCost 100 gold", buttonXStart + spacing * 3, buttonYStart, 100, "TowerBehemoth");
+        var tbutton3 = new ShopButton("Behemoth Tower\nCost 100 gold", buttonXStart + spacing * 3, buttonYStart, 100, Values.behemothTower);
         renderTo.getChildren().add(tbutton3);
 
         Label powersLb = new Label("Power-ups");
@@ -94,46 +73,43 @@ public class Shop {
 
     }
 
+    public Tower createTower(int towerVal) {
+        TowerBuilder builder = new TowerBuilder();
+        switch (towerVal) {
+            case Values.laserTower:
+                director.constructTowerLaser(builder);
+                break;
+            case Values.shotgunLaserTower:
+                director.constructTowerShotgun(builder);
+                break;
+            case Values.behemothTower:
+                director.constructTowerBehemoth(builder);
+                break;
+            case Values.flameTower:
+                director.constructTowerFlame(builder);
+                break;
+            default:
+                System.err.println("towername switch default triggered");
+                director.constructTowerLaser(builder);
+                break;
+        }
+        return builder.getTower();
+    }
+
     private class ShopButton extends Button {
 
 //        tower buttons
-        public ShopButton(String content, int x, int y, int price, String towerName) {
+        public ShopButton(String content, int x, int y, int price, int towerVal) {
             // regular button init
             super(content);
             setLayoutX(x);
             setLayoutY(y);
             setOnAction((ActionEvent e) -> {
                 if (gameWindow.getMouseItemActive()) {
-                    towerRefund();
                     gameWindow.setMouseItem(false, null);
                 } else if (gameManager.getGold() >= price) {
-                    Tower tower;
-                    TowerBuilder builder = new TowerBuilder();
-                    switch (towerName) {
-                        case "TowerLaser":
-                            director.constructTowerLaser(builder);
-                            tower = builder.getTower();
-                            break;
-                        case "TowerShotgun":
-                            director.constructTowerShotgun(builder);
-                            tower = builder.getTower();
-                            break;
-                        case "TowerBehemoth":
-                            director.constructTowerBehemoth(builder);
-                            tower = builder.getTower();
-                            break;
-                        case "TowerFlame":
-                            director.constructTowerFlame(builder);
-                            tower = builder.getTower();
-                            break;
-                        default:
-                            System.err.println("towername switch default triggered");
-                            director.constructTowerLaser(builder);
-                            tower = builder.getTower();
-                            break;
-                    }
-                    spawning = tower.getValue();
-                    gameManager.decreaseGold(price);
+                    Tower tower = createTower(towerVal);
+                    spawning = tower;
                     gameWindow.setMouseItem(true, tower);
                 }
             }
