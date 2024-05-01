@@ -42,12 +42,13 @@ public class Shop {
             case Values.flameTower:
                 gameManager.increaseGold(50);
                 break;
+            case Values.shotgunLaserTower:
+                gameManager.increaseGold(50);
+                break;
             case Values.behemothTower:
                 gameManager.increaseGold(100);
                 break;
-            case Values.shotgunLaserTower:
-                gameManager.increaseGold(100);
-                break;
+
         }
     }
 
