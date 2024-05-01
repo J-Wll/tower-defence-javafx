@@ -113,6 +113,9 @@ public class Monster implements GameSubscriber {
                 yCord += 1;
                 break;
         }
+//        To keep it lined up with the track
+        x = xCord * 64;
+        y = yCord * 64;
         //        If it's at the end of the track
         try {
             if (tileGrid[yCord][xCord].getAirID() == Values.end) {

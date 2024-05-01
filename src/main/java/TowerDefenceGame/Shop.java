@@ -19,6 +19,7 @@ public class Shop {
     private GameStatePublisher gameManager;
     private Textures textures;
     private int spawning;
+    private Director director = new Director();
 
     /**
      *
@@ -106,23 +107,29 @@ public class Shop {
                     gameWindow.setMouseItem(false, null);
                 } else if (gameManager.getGold() >= price) {
                     Tower tower;
+                    TowerBuilder builder = new TowerBuilder();
                     switch (towerName) {
                         case "TowerLaser":
-                            tower = new TowerLaser();
+                            director.constructTowerLaser(builder);
+                            tower = builder.getTower();
                             break;
                         case "TowerShotgun":
-                            tower = new TowerShotgun();
+                            director.constructTowerShotgun(builder);
+                            tower = builder.getTower();
                             break;
                         case "TowerBehemoth":
-                            tower = new TowerBehemoth();
+                            director.constructTowerBehemoth(builder);
+                            tower = builder.getTower();
                             break;
                         case "TowerFlame":
-                            tower = new TowerFlame();
+                            director.constructTowerFlame(builder);
+                            tower = builder.getTower();
                             break;
                         default:
                             System.err.println("towername switch default triggered");
-                            tower = new TowerLaser();
-
+                            director.constructTowerLaser(builder);
+                            tower = builder.getTower();
+                            break;
                     }
                     spawning = tower.getValue();
                     gameManager.decreaseGold(price);
