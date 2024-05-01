@@ -26,6 +26,10 @@ public class GameStatePublisher {
     private GameStatePublisher() {
     }
 
+    /**
+     *
+     * @return
+     */
     public static GameStatePublisher getInstance() {
         if (instance == null) {
             instance = new GameStatePublisher();
@@ -33,6 +37,12 @@ public class GameStatePublisher {
         return instance;
     }
 
+    /**
+     *
+     * @param hp
+     * @param gold
+     * @param currentLevel
+     */
     public void init(int hp, int gold, int currentLevel) {
         this.hp = new SimpleIntegerProperty(hp);
         this.gold = new SimpleIntegerProperty(gold);

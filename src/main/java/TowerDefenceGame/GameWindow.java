@@ -45,6 +45,10 @@ public class GameWindow extends Pane {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public static GameWindow getInstance() {
         if (instance == null) {
             instance = new GameWindow();
@@ -68,6 +72,16 @@ public class GameWindow extends Pane {
         handler = null;
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @param root
+     * @param STARTHP
+     * @param STARTGOLD
+     * @param app
+     * @param currentLevel
+     */
     public void init(int x, int y, Group root, int STARTHP, int STARTGOLD, App app, int currentLevel) {
         WIDTH = x;
         HEIGHT = y;
