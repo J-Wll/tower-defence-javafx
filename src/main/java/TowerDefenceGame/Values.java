@@ -8,6 +8,7 @@ package TowerDefenceGame;
  *
  * @author user
  */
+//    For logic and accessing textures
 // store of values so they are not hard coded
 // tiles (ground) are > 0
 // 0 is empty
@@ -25,7 +26,6 @@ public class Values {
      */
     public static final int tileSize = 64;
 
-//    For logic and accessing textures
     /**
      *
      */

@@ -118,12 +118,13 @@ public class Level {
 //                        Starts at a low chance for hard enemies but scales pretty quick with intensity
                         Random rand = new Random();
                         int randomMon = rand.nextInt(100 - 1 + 1) + 1;
-//                        1% chance for boss mob pass 75
+//                        2% chance for boss mob past 68
                         if (intensityValue > 68) {
-                            if (randomMon == 1) {
+                            if (randomMon == 1 || randomMon == 2) {
                                 toSpawn = Values.monster4;
                             }
-                        } else if (randomMon >= 1 && randomMon <= 2 + Math.round(intensityValue)) {
+                        }
+                        if (randomMon >= 3 && randomMon <= 4 + Math.round(intensityValue)) {
                             toSpawn = Values.monster2;
                         } else if (randomMon >= 60 && randomMon <= 61 + Math.round(intensityValue)) {
                             toSpawn = Values.monster3;
@@ -148,7 +149,8 @@ public class Level {
         intensityValue += 0.008 + ((currentLevel * 1.45) / 1000);
         int roundedIntensity = (int) Math.round(intensityValue);
 
-        if (spawnThreshold >= 3) {
+//        Maximum spawn rate of one per 2 frames (30 per second)
+        if (spawnThreshold >= (3 + currentLevel)) {
             spawnThreshold = (int) (baseSpawnThreshold - currentLevel - roundedIntensity);
         }
 //        stop it from calling every frame

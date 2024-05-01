@@ -66,8 +66,6 @@ public class TowerBehemoth implements Tower {
      * @param y
      */
     public void setPos(int x, int y) {
-//        this.x = x;
-//        this.y = y;
         baseTower.setPos(x, y);
     }
 

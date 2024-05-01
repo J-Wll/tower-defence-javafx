@@ -113,7 +113,6 @@ public class Monster implements GameSubscriber {
                 yCord += 1;
                 break;
         }
-
         //        If it's at the end of the track
         try {
             if (tileGrid[yCord][xCord].getAirID() == Values.end) {
@@ -126,13 +125,10 @@ public class Monster implements GameSubscriber {
         } catch (Exception e) {
             System.err.println(e);
         }
-
         if (!alive) {
             return;
         }
-
         directionSwitch();
-
         walkCounter = 0;
     }
 
