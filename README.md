@@ -10,3 +10,5 @@ Intensity factor makes more and harder enemies spawn, it increases with time and
 Hold shift when clicking to place multiple towers if you have the gold.
 
 Made in Netbeans, should work just fine if you import it into that IDE. Had issues with compiling it into a working .jar file.
+
+![01-05-2024-20-06-Tower_Defence-PertinentStableLlama](https://github.com/J-Wll/tower-defence-javafx/assets/80954812/841805e3-d682-47ae-a151-ab0730dcef6c)
