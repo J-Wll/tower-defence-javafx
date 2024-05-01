@@ -8,3 +8,5 @@ Differences being, it is made in JavaFX, using some design patterns, with more t
 Intensity factor makes more and harder enemies spawn, it increases with time and when killing enemies.
 
 Hold shift when clicking to place multiple towers if you have the gold.
+
+Made in Netbeans, should work just fine if you import it into that IDE. Had issues with compiling it into a working .jar file.
