@@ -48,6 +48,14 @@ public class App extends Application {
 
     /**
      *
+     * @param args
+     */
+    public static void main(String[] args) {
+        launch();
+    }
+
+    /**
+     *
      * @param to
      * @param text
      */
@@ -90,14 +98,6 @@ public class App extends Application {
         }));
         timeline.setCycleCount(1);
         timeline.play();
-    }
-
-    /**
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        launch();
     }
 
 }

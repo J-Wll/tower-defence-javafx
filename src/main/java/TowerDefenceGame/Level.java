@@ -42,6 +42,32 @@ public class Level {
 
     /**
      *
+     * @param gc
+     * @param textures
+     * @param currentLevel
+     */
+    public Level(GraphicsContext gc, Textures textures, int currentLevel) {
+        this.gc = gc;
+        this.textures = textures;
+        this.currentLevel = currentLevel;
+        monsters = new Monster[50 + (50 * currentLevel)];
+        monstersRemaining = monsters.length;
+
+        for (int yTile = 0; yTile < tileGrid.length; yTile++) {
+            for (int xTile = 0; xTile < tileGrid[0].length; xTile++) {
+                tileGrid[yTile][xTile] = new Tile(xTile * tileSize, yTile * tileSize, tileSize, tileSize, Values.grass, Values.empty, textures);
+            }
+        }
+
+        for (int i = 0; i < monsters.length; i++) {
+            monsters[i] = new Monster(this, gc);
+        }
+
+        gameManager.setRemaining(monstersRemaining);
+    }
+
+    /**
+     *
      * @return
      */
     public Tile[][] getTileGrid() {
@@ -73,32 +99,6 @@ public class Level {
         monstersRemaining -= by;
         gameManager.decreaseRemaining(by);
 
-    }
-
-    /**
-     *
-     * @param gc
-     * @param textures
-     * @param currentLevel
-     */
-    public Level(GraphicsContext gc, Textures textures, int currentLevel) {
-        this.gc = gc;
-        this.textures = textures;
-        this.currentLevel = currentLevel;
-        monsters = new Monster[50 + (50 * currentLevel)];
-        monstersRemaining = monsters.length;
-
-        for (int yTile = 0; yTile < tileGrid.length; yTile++) {
-            for (int xTile = 0; xTile < tileGrid[0].length; xTile++) {
-                tileGrid[yTile][xTile] = new Tile(xTile * tileSize, yTile * tileSize, tileSize, tileSize, Values.grass, Values.empty, textures);
-            }
-        }
-
-        for (int i = 0; i < monsters.length; i++) {
-            monsters[i] = new Monster(this, gc);
-        }
-
-        gameManager.setRemaining(monstersRemaining);
     }
 
     /**
@@ -144,6 +144,10 @@ public class Level {
         }
     }
 
+    /**
+     *
+     * @param to
+     */
     public void setIntensity(double to) {
         intensity = to;
         roundedIntensity = (int) Math.round(intensity);

@@ -12,6 +12,10 @@ import javafx.scene.paint.Color;
  */
 public class Director {
 
+    /**
+     *
+     * @param builder
+     */
     public void constructTowerFlame(TowerBuilder builder) {
         builder.withBaseDamage(0.01)
                 .withAttackCooldown(1)
@@ -25,6 +29,10 @@ public class Director {
 
     }
 
+    /**
+     *
+     * @param builder
+     */
     public void constructTowerBehemoth(TowerBuilder builder) {
         builder
                 .withBaseDamage(0.06)
@@ -37,6 +45,10 @@ public class Director {
 
     }
 
+    /**
+     *
+     * @param builder
+     */
     public void constructTowerLaser(TowerBuilder builder) {
         builder
                 .withBaseDamage(0.04)
@@ -47,6 +59,10 @@ public class Director {
                 .withValue(Values.laserTower);
     }
 
+    /**
+     *
+     * @param builder
+     */
     public void constructTowerShotgun(TowerBuilder builder) {
         builder
                 .withBaseDamage(9)

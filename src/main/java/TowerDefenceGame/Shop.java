@@ -73,6 +73,11 @@ public class Shop {
 
     }
 
+    /**
+     *
+     * @param towerVal
+     * @return
+     */
     public Tower createTower(int towerVal) {
         TowerBuilder builder = new TowerBuilder();
         switch (towerVal) {

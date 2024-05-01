@@ -150,6 +150,10 @@ public class Tower implements GameSubscriber {
         this.y = y;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCost() {
         return this.cost;
     }
