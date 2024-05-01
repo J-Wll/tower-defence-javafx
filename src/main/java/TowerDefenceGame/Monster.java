@@ -5,6 +5,7 @@
 package TowerDefenceGame;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -13,6 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
 public class Monster implements GameSubscriber {
 
     private double x, y, width, height, health;
+    private double maxHealth;
     private int rewardVal = 10;
     private int hpLoss = 1;
     private int monID = -10;
@@ -92,6 +94,7 @@ public class Monster implements GameSubscriber {
                         hpLoss = 10;
                         break;
                 }
+                this.maxHealth = health;
             }
 
         }
@@ -205,6 +208,11 @@ public class Monster implements GameSubscriber {
      *
      */
     public void render() {
+//        health bar
+        gc.setFill(Color.BLACK);
+        gc.fillRect(x, y - 10, width, 8);
+        gc.setFill(Color.GREEN);
+        gc.fillRect(x + 1, y - 9, ((health / maxHealth) * width) - 2, 6);
         gc.drawImage(Textures.getText().get(monID), x, y, width, height);
 
         if (burnTime > 0 && alive) {
