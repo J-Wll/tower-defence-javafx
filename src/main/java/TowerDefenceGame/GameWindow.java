@@ -20,19 +20,19 @@ import javafx.util.Duration;
 public class GameWindow extends Pane {
 
     private static int WIDTH, HEIGHT;
-    private final Level level;
+    private Level level;
     private int currentLevel = 1;
-    private final Save save = new Save();
-    private final Canvas canvas;
-    private final GraphicsContext gc;
+    private Save save = new Save();
+    private Canvas canvas;
+    private GraphicsContext gc;
     private Boolean endLevelShown = false;
-    private final Textures textures = new Textures();
+    private Textures textures = new Textures();
     private Boolean mouseItemActive = false;
     private Tower mouseTower;
     private double mouseX, mouseY;
     private GameStatePublisher gameManager = null;
     private Shop shop = null;
-    private final Group root;
+    private Group root;
     private App app;
 
     private Timeline gameLoop;
@@ -41,30 +41,14 @@ public class GameWindow extends Pane {
 
     private static GameWindow instance = null;
 
-    /**
-     *
-     * @param x
-     * @param y
-     * @param root
-     * @param STARTHP
-     * @param STARTGOLD
-     * @param app
-     * @param currentLevel
-     * @return
-     */
-    public static GameWindow getInstance(int x, int y, Group root, int STARTHP, int STARTGOLD, App app, int currentLevel) {
-        if (instance == null) {
-            instance = new GameWindow(x, y, root, STARTHP, STARTGOLD, app, currentLevel);
-        }
-        return instance;
+    private GameWindow() {
+
     }
 
-//    Version for acessing without args
-    /**
-     *
-     * @return
-     */
     public static GameWindow getInstance() {
+        if (instance == null) {
+            instance = new GameWindow();
+        }
         return instance;
     }
 
@@ -84,12 +68,7 @@ public class GameWindow extends Pane {
         handler = null;
     }
 
-    /**
-     *
-     * @param x
-     * @param y
-     */
-    private GameWindow(int x, int y, Group root, int STARTHP, int STARTGOLD, App app, int currentLevel) {
+    public void init(int x, int y, Group root, int STARTHP, int STARTGOLD, App app, int currentLevel) {
         WIDTH = x;
         HEIGHT = y;
         canvas = new Canvas(WIDTH, HEIGHT);
@@ -100,7 +79,8 @@ public class GameWindow extends Pane {
 
 //        Manages health and gold values, sends events relating to them
 //        these two are rendered at the bottom of start so they are on top of canvas
-        this.gameManager = GameStatePublisher.getInstance(STARTHP, STARTGOLD, currentLevel);
+        this.gameManager = GameStatePublisher.getInstance();
+        gameManager.init(STARTHP, STARTGOLD, currentLevel);
 //        Can't use singleton because not intialised yet
         this.shop = new Shop(this);
 

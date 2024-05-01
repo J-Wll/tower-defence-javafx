@@ -41,7 +41,8 @@ public class App extends Application {
     }
 
     private void addGameWindow() {
-        GameWindow gameWindow = GameWindow.getInstance(WIDTH, HEIGHT, root, STARTHP, STARTGOLD, this, currentLevel);
+        GameWindow gameWindow = GameWindow.getInstance();
+        gameWindow.init(WIDTH, HEIGHT, root, STARTHP, STARTGOLD, this, currentLevel);
         root.getChildren().add(gameWindow);
         gameWindow.start();
     }

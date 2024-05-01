@@ -21,39 +21,25 @@ public class GameStatePublisher {
     private IntegerProperty gold;
     private IntegerProperty intensity;
     private IntegerProperty remaining;
-    private final int currentLevel;
+    private int currentLevel;
 
-    private GameStatePublisher(int hp, int gold, int currentLevel) {
+    private GameStatePublisher() {
+    }
+
+    public static GameStatePublisher getInstance() {
+        if (instance == null) {
+            instance = new GameStatePublisher();
+        }
+        return instance;
+    }
+
+    public void init(int hp, int gold, int currentLevel) {
         this.hp = new SimpleIntegerProperty(hp);
         this.gold = new SimpleIntegerProperty(gold);
         this.intensity = new SimpleIntegerProperty(0);
         this.remaining = new SimpleIntegerProperty(0);
         this.subscribers = new ArrayList();
         this.currentLevel = currentLevel;
-    }
-
-    /**
-     *
-     * @param hp
-     * @param gold
-     * @param currentLevel
-     * @return
-     */
-//    Version intended for creating it
-    public static GameStatePublisher getInstance(int hp, int gold, int currentLevel) {
-        if (instance == null) {
-            instance = new GameStatePublisher(hp, gold, currentLevel);
-        }
-        return instance;
-    }
-
-//    Version for acessing without args
-    /**
-     *
-     * @return
-     */
-    public static GameStatePublisher getInstance() {
-        return instance;
     }
 
     /**
