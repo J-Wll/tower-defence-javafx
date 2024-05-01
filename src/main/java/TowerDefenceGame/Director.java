@@ -17,7 +17,7 @@ public class Director {
      * @param builder
      */
     public void constructTowerFlame(TowerBuilder builder) {
-        builder.withBaseDamage(0.01)
+        builder.withBaseDamage(0.05)
                 .withAttackCooldown(1)
                 .withAttackRadius(128)
                 .withMaximumTargets(1)
@@ -35,7 +35,7 @@ public class Director {
      */
     public void constructTowerBehemoth(TowerBuilder builder) {
         builder
-                .withBaseDamage(0.06)
+                .withBaseDamage(0.08)
                 .withAttackCooldown(1)
                 .withAttackRadius(250)
                 .withMaximumTargets(5)
@@ -51,7 +51,7 @@ public class Director {
      */
     public void constructTowerLaser(TowerBuilder builder) {
         builder
-                .withBaseDamage(0.04)
+                .withBaseDamage(0.05)
                 .withAttackCooldown(1)
                 .withAttackRadius(200)
                 .withMaximumTargets(1)

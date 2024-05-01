@@ -95,7 +95,7 @@ public class Level {
      * @param by
      */
     public void decreaseRemaining(int by) {
-        setIntensity(intensity + 0.30);
+        setIntensity(intensity + 0.35);
         monstersRemaining -= by;
         gameManager.decreaseRemaining(by);
 

@@ -218,7 +218,7 @@ public class Monster implements GameSubscriber {
         if (burnTime > 0 && alive) {
             gc.drawImage(Textures.getText().get(Values.onFire), x + 37, y, 25, 25);
             burnTime -= 1;
-            takeDamage(0.01);
+            takeDamage(0.015);
         }
 
         if (!alive) {
