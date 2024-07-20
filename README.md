@@ -4,11 +4,11 @@ Based on this youtube series https://www.youtube.com/playlist?list=PLB85864F4E46
 
 Differences being, it is made in JavaFX, using some design patterns, with more towers, enemies, levels and the addition of power-ups.
 
+Uses Maven. Compiles to Java 11.
+
 
 Intensity factor makes more and harder enemies spawn, it increases with time and when killing enemies.
 
 Hold shift when clicking to place multiple towers if you have the gold.
-
-Made in Netbeans, should work just fine if you import it into that IDE. Compiles to Java 11.
 
 ![01-05-2024-20-06-Tower_Defence-PertinentStableLlama](https://github.com/J-Wll/tower-defence-javafx/assets/80954812/841805e3-d682-47ae-a151-ab0730dcef6c)
