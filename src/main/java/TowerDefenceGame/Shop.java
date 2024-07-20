@@ -45,16 +45,16 @@ public class Shop {
         towersLb.setLayoutX(buttonXStart);
         renderTo.getChildren().add(towersLb);
 
-        var tbutton = new ShopButton("Laser Tower\nCost 25 gold", buttonXStart, buttonYStart, 25, Values.laserTower);
+        ShopButton tbutton = new ShopButton("Laser Tower\nCost 25 gold", buttonXStart, buttonYStart, 25, Values.laserTower);
         renderTo.getChildren().add(tbutton);
 
-        var tbutton1 = new ShopButton("Flame Tower\nCost 50 gold", buttonXStart + spacing, buttonYStart, 50, Values.flameTower);
+        ShopButton tbutton1 = new ShopButton("Flame Tower\nCost 50 gold", buttonXStart + spacing, buttonYStart, 50, Values.flameTower);
         renderTo.getChildren().add(tbutton1);
 
-        var tbutton2 = new ShopButton("Shotgun Laser Tower\nCost 50 gold", buttonXStart + spacing * 2, buttonYStart, 50, Values.shotgunLaserTower);
+        ShopButton tbutton2 = new ShopButton("Shotgun Laser Tower\nCost 50 gold", buttonXStart + spacing * 2, buttonYStart, 50, Values.shotgunLaserTower);
         renderTo.getChildren().add(tbutton2);
 
-        var tbutton3 = new ShopButton("Behemoth Tower\nCost 100 gold", buttonXStart + spacing * 3, buttonYStart, 100, Values.behemothTower);
+        ShopButton tbutton3 = new ShopButton("Behemoth Tower\nCost 100 gold", buttonXStart + spacing * 3, buttonYStart, 100, Values.behemothTower);
         renderTo.getChildren().add(tbutton3);
 
         Label powersLb = new Label("Power-ups");
@@ -62,13 +62,13 @@ public class Shop {
         powersLb.setLayoutX(buttonXStart + spacing * 4 + 50);
         renderTo.getChildren().add(powersLb);
 
-        var lbutton = new ShopButton("0.25x current enemies speed\nCost 100 gold", buttonXStart + spacing * 4 + 50, buttonYStart, 100, "slow-power", true);
+        ShopButton lbutton = new ShopButton("0.25x current enemies speed\nCost 100 gold", buttonXStart + spacing * 4 + 50, buttonYStart, 100, "slow-power", true);
         renderTo.getChildren().add(lbutton);
 
-        var lbutton1 = new ShopButton("1.5x tower damage for 10s\nCost 100 gold", buttonXStart + spacing * 5 + 50, buttonYStart, 100, "damage-power", true);
+        ShopButton lbutton1 = new ShopButton("1.5x tower damage for 10s\nCost 100 gold", buttonXStart + spacing * 5 + 50, buttonYStart, 100, "damage-power", true);
         renderTo.getChildren().add(lbutton1);
 
-        var lbutton2 = new ShopButton("Buy 40 HP\nCost 100 gold", buttonXStart + spacing * 6 + 50, buttonYStart, 100, "hp-power", true);
+        ShopButton lbutton2 = new ShopButton("Buy 40 HP\nCost 100 gold", buttonXStart + spacing * 6 + 50, buttonYStart, 100, "hp-power", true);
         renderTo.getChildren().add(lbutton2);
 
     }
