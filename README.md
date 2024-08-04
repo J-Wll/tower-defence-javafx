@@ -4,7 +4,7 @@ Based on this youtube series https://www.youtube.com/playlist?list=PLB85864F4E46
 
 Differences being, it is made in JavaFX, using some design patterns, with more towers, enemies, levels and the addition of power-ups.
 
-Uses Maven. Compiles to Java 11.
+Uses Maven. Java 21 and Java 8 Version.
 
 
 Intensity factor makes more and harder enemies spawn, it increases with time and when killing enemies.
