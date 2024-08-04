@@ -1,6 +1,5 @@
 package TowerDefenceGame;
 
-import java.io.File;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,6 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+
+import java.io.InputStream;
 
 /**
  *
@@ -135,9 +136,8 @@ public class GameWindow extends Pane {
 //        (calling get children of the pane)
         getChildren().add(canvas);
 
-        File saveFile = new File("./src/main/resources/level" + currentLevel + ".save");
+        InputStream saveFile = this.getClass().getResourceAsStream("/level" + currentLevel + ".save");
         save.loadSave(level, saveFile);
-
     }
 
     /**

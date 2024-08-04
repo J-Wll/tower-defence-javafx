@@ -18,7 +18,7 @@ public class Save {
      * @param level
      * @param loadPath
      */
-    public void loadSave(Level level, File loadPath) {
+    public void loadSave(Level level, InputStream loadPath) {
         Tile[][] tileGrid = level.getTileGrid();
         int counter = 0;
         try {

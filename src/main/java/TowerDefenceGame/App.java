@@ -88,7 +88,7 @@ public class App extends Application {
         root.getChildren().add(label);
 
 //        Way of adding delay without causing issues (in contrast to thread.sleep)
-//        Done so the end screen can be read 
+//        Done so the end screen can be read
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
