@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -75,12 +76,12 @@ public class App extends Application {
         gameWindow = null;
 
 //        End screen
-        var label = new Label(text);
+        Label label = new Label(text);
         label.setStyle("-fx-text-fill: white");
         label.setLayoutX(50);
         label.setLayoutY(50);
-        var endLevelCanvas = new Canvas(WIDTH, HEIGHT);
-        var endLevelGc = endLevelCanvas.getGraphicsContext2D();
+        Canvas endLevelCanvas = new Canvas(WIDTH, HEIGHT);
+        GraphicsContext endLevelGc = endLevelCanvas.getGraphicsContext2D();
         endLevelGc.clearRect(0, 0, WIDTH, HEIGHT);
         endLevelGc.setFill(Color.BLACK);
         endLevelGc.fillRect(0, 0, WIDTH, HEIGHT);
